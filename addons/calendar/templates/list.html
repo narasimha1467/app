@@ -1,0 +1,28 @@
+<ion-view view-title="{{ 'mma.calendar.calendarevents' | translate }}">
+    <mm-split-view load-when="eventsLoaded">
+        <ion-content>
+
+            <ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="eventsLoaded" on-refresh="refreshEvents()">
+            </ion-refresher>
+            <mm-loading hide-until="eventsLoaded">
+         
+				<table width="100%" class="timetable_table events_top">
+			<tr width="100%" class="attendence_tr" ng-repeat="event in events track by $index">
+				 <td ng-if="count == 0" class="item">{{ 'mma.calendar.noevents' | translate }}</td>
+				 <td class="calender_td">
+				 <a mm-split-view-link="site.calendar-event({id: event.id})" title="{{event.name}}">
+					<div class="callender"><div class="side_heading">Timings</div><div class="event_name">{{ event.timestart | mmToLocaleString }}</div></div>
+	<div class="callender"><div class="side_heading">Event Name</div><div class="event_name">{{event.name}}</div></div>
+</div>
+		</a>		</td>
+			</tr>
+</table>	
+
+                <ion-infinite-scroll ng-if="canLoadMore"
+                        immediate-check="false"
+                        on-infinite="loadMoreEvents()" >
+                 </ion-infinite-scroll>
+            </mm-loading>
+        </ion-content>
+    </mm-split-view>
+</ion-view>
