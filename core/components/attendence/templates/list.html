@@ -1,0 +1,19 @@
+<ion-view view-title="Attendence">
+    <ion-content padding="true">
+        <!-- ion-refresher needs to be direct child of ion-content to work with native scrolling -->
+        <ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="attendenceLoaded" on-refresh="refreshAttendence()">
+		
+        </ion-refresher>
+		<table width="100%" class="timetable_table">
+			<tr width="100%" class="attendence_tr" ng-repeat="attendence in attendence">
+				<td class="attendence_td">
+					<div class="attendence_c"><div class="attendence_course">{{attendence.classcode}}</div><div class="attendende_percentage side_heading">Percentage:<span class="percentage_count">{{attendence.presentage}}%</span></div></div>
+					<div class="timetable_details"><div class="attendence_instructor"><span class="side_heading">Total Classes:</span>{{attendence.totalclass}}</div><div class="attendence_instructor"><span class="side_heading">Total Present:</span>{{attendence.total_present}}</div><div class="attendence_instructor"><span class="side_heading">Total Absent:</span>{{attendence.total_absent}}</div></div>
+				</td>
+			</tr>
+		</table>	
+            
+      
+    </ion-content>
+</ion-view>
+ 

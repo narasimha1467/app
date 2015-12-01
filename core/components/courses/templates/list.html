@@ -1,0 +1,21 @@
+<ion-view view-title="{{ 'mm.courses.mycourses' | translate }}">
+    <ion-content padding="true">
+<!-- ion-refresher needs to be direct child of ion-content to work with native scrolling -->
+        <ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="coursesLoaded" on-refresh="refreshCourses()">
+        </ion-refresher>
+        <mm-loading hide-until="coursesLoaded">
+           
+            <section ng-repeat="course in courses | filter:{fullname: filterText}" class="list card">
+                 <a class="item" ui-sref="site.mm_course({course: course})" title="{{course.fullname}}">
+                    <h2 class="courses_name"><mm-format-text watch="true">{{course.fullname}}</mm-format-text></h2>
+                
+               <i class="icon ion-android-contact"></i><div class="instructors_name">{{course.instructorname}}</div><div class="plan_name"> {{course.planname}} - {{course.semesterperiod}}</div>
+                
+                   
+               
+				</a>
+            </section>
+		
+        </mm-loading>
+    </ion-content>
+</ion-view>
