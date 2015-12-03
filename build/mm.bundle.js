@@ -5255,6 +5255,54 @@ angular.module('mm.core.courses')
     }];
     return self;
 });
+angular.module('mm.core.home')
+.controller('mmHomeListCtrl', ["$scope", "$mmHome","$mmUtil", function($scope, $mmHome,$mmUtil) {
+    function fetchHome(refresh) {
+        return $mmHome.getUserHome(refresh).then(function(home) {
+            $scope.home = home;
+          }, function(error) {
+            if (typeof error != 'undefined' && error !== '') {
+                $mmUtil.showErrorModal(error);
+            } else {
+                $mmUtil.showErrorModal('mm.courses.errorloadcourses', true);
+            }
+        });
+    }
+	fetchHome().finally(function() {
+        $scope.homeLoaded = true;
+    });
+	 $scope.refreshHome = function() {
+        fetchHome(true).finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+}]);
+
+angular.module('mm.core.home')
+.factory('$mmHome', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+    var self = {},
+	currentHome = {};
+         self.getUserHome = function(refresh, siteid) {
+        siteid = siteid || $mmSite.getId();
+        var userid = $mmSite.getUserId(),
+            presets = {},
+            data = {userid: userid};
+        if (typeof userid === 'undefined') {
+            return $q.reject();
+        }
+        if (refresh) {
+            presets.getFromCache = false;
+        }
+        return $mmSitesManager.getSite(siteid).then(function(site) {
+            return site.read('local_user_details_custom', data, presets).then(function(home) {
+                //storeCoursesInMemory(attendence);
+                return home;
+            });
+        });
+		 };	
+    return self;
+}]);
 angular.module('mm.core.attendence')
 .controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$mmUtil", function($scope, $mmAttendence,$mmUtil) {
     function fetchAttendence(refresh) {

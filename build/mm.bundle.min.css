@@ -148,3 +148,7 @@ i.icon.ion-android-contact {width: 58px;float: left;font-size: 52px;border-radiu
 .timetable_table tr {
     padding: 17px 0px 14px 0;
 }
+.student_details{
+	text-align:center;
+	color:#A30D1D;
+}
