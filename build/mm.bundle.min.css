@@ -45,12 +45,14 @@ ion-view.home_back.pane {background-color: #9f1c32;}
 	width:33%;
 	float:right;
 }
+/*
 .scroll {
 	 margin-top: 17px;
     height: auto !important;
     position: fixed;
 	width: 100%;
 }
+*/
 h2.courses_name {padding-bottom: 15px;font-size:16px}
 .instructors_name {
     padding-left: 16px;
