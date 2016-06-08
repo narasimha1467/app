@@ -5580,7 +5580,7 @@ angular.module('mm.core.login')
 			var url='http://mydy.dypatil.edu/hospitality';
 		}
 		else if(finalsplit=="mt"){
-			var url='http://mydy.dypatil.edu/management';
+			var url='http://mgmt.moodlemenu.com';
 		}
 		else{
 			 $mmUtil.showErrorModal('mm.login.siteurlrequired', true);
