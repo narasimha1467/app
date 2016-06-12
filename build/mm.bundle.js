@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.files','mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
+angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.files','mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
 .run(["$ionicPlatform", function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -6816,7 +6816,27 @@ angular.module('mm.addons.mod_resource', ['mm.core'])
 .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
     $mmCourseDelegateProvider.registerContentHandler('mmaModResource', 'resource', '$mmaModResourceCourseContentHandler');
 }]);
+angular.module('mm.addons.mod_flexpaper', ['mm.core'])
+    .config(["$stateProvider", function($stateProvider) {
+        $stateProvider
+            .state('site.mod_flexpaper', {
+                url: '/mod_flexpaper',
+                params: {
+                    module: null,
+                    courseid: null
+                },
+                views: {
+                    'site': {
+                        controller: 'mmaModFlexpaperIndexCtrl',
+                        templateUrl: 'addons/mod_flexpaper/templates/index.html'
+                    }
+                }
+            });
+    }])
 
+    .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
+        $mmCourseDelegateProvider.registerContentHandler('mmaModFlexpaper', 'flexpaper', '$mmaModFlexpaperCourseContentHandler');
+    }]);
 angular.module('mm.addons.mod_url', ['mm.core'])
 .config(["$stateProvider", function($stateProvider) {
     $stateProvider
@@ -11660,6 +11680,46 @@ angular.module('mm.addons.mod_resource')
     };
     return self;
 }]);
+angular.module('mm.addons.mod_flexpaper')
+    .factory('$mmaModFlexpaper', ["$mmSite", "$mmUtil", "$q", function($mmSite, $mmUtil, $q) {
+        var self = {};
+        self.logView = function(id) {
+            if (id) {
+                var params = {
+                    urlid: id
+                };
+                return $mmSite.write('mod_url_view_url', params);
+            }
+            return $q.reject();
+        };
+        self.open = function(url) {
+            $mmUtil.openInBrowser(url);
+        };
+        return self;
+    }]);
+angular.module('mm.addons.mod_flexpaper')
+    .controller('mmaModFlexpaperIndexCtrl', ["$scope","$mmSite", "$mmSitesManager", "$stateParams", "$mmaModFlexpaper", "$mmCourse", "$sce", function($scope, $mmSite, $mmSitesManager, $stateParams, $mmaModFlexpaper, $mmCourse, $sce) {
+        var module = $stateParams.module || {},
+            courseid = $stateParams.courseid;
+        $scope.title = module.name;
+        $scope.description = module.description;
+        $scope.url= module;
+        //var vurl=$mmCourse.getModuleFlexpaperurl(module.instance);
+        var data = {
+            flexpaperid: module.instance
+        };
+
+        var presets = {};
+        return $mmSite.read('local_mobile_flexpaper', data, presets).then(function (vurls) {
+            //storeCoursesInMemory(attendence);
+            //console.log("vurls - "+vurls);
+
+            stdetails = vurls;
+            $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
+            //$scope.type=stdetails.mimetype;
+        });
+
+    }]);
 
 angular.module('mm.addons.notes')
 .factory('$mmaNotesHandlers', ["$mmaNotes", "$mmSite", "$translate", "$ionicLoading", "$ionicModal", "$mmUtil", function($mmaNotes, $mmSite, $translate, $ionicLoading, $ionicModal, $mmUtil) {
