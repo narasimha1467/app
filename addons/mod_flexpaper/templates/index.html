@@ -1,7 +1,8 @@
 <ion-view>
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
-        <video src="{{ vurl }}" onclick="this.play();" controls/>
+        
+        <mm-iframe src="{{ vurl }}"></mm-iframe>
 
     </ion-content>
 </ion-view>
