@@ -11692,7 +11692,7 @@ angular.module('mm.addons.mod_flexpaper')
                 $scope.title = module.name;
 
                 $scope.action = function(e) {
-                    $state.go('site.mod_opencast', {module: module, courseid: courseid});
+                    $state.go('site.mod_flexpaper', {module: module, courseid: courseid});
                 };
                 if (module.contents && module.contents[0] && module.contents[0].fileurl) {
                     $scope.buttons = [{
