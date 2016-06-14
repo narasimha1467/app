@@ -115,7 +115,7 @@
     <gap:plugin name="cordova-plugin-statusbar" source="npm" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
     <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
-
+    <gap:plugin name="com.phonegap.plugins.childbrowser" spec="5.0.0" source="pgb" />
     <gap:plugin name="com.phonegap.plugins.pushplugin" />
     <gap:plugin name="net.tunts.webintent" />
     <gap:plugin name="cordova-plugin-customurlscheme" source="npm">

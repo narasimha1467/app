@@ -2,7 +2,7 @@
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
         
-        <mm-iframe src="{{ vurl }}"></mm-iframe>
+       <a href="{{vurl}}" id="embedURL" onclick="window.plugins.childBrowser.showWebPage(encodeURI('+{{ vurl }}+'));">Download file</a>
 
     </ion-content>
 </ion-view>
