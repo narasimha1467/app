@@ -6816,6 +6816,7 @@ angular.module('mm.addons.mod_resource', ['mm.core'])
 .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
     $mmCourseDelegateProvider.registerContentHandler('mmaModResource', 'resource', '$mmaModResourceCourseContentHandler');
 }]);
+
 angular.module('mm.addons.mod_flexpaper', ['mm.core'])
     .config(["$stateProvider", function($stateProvider) {
         $stateProvider
@@ -6833,7 +6834,6 @@ angular.module('mm.addons.mod_flexpaper', ['mm.core'])
                 }
             });
     }])
-
     .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
         $mmCourseDelegateProvider.registerContentHandler('mmaModFlexpaper', 'flexpaper', '$mmaModFlexpaperCourseContentHandler');
     }]);
@@ -11680,6 +11680,39 @@ angular.module('mm.addons.mod_resource')
     };
     return self;
 }]);
+angular.module('mm.addons.mod_flexpaper')
+    .factory('$mmaModFlexpaperCourseContentHandler', ["$mmCourse", "$mmaModFlexpaper", "$state", function($mmCourse, $mmaModFlexpaper, $state) {
+        var self = {};
+        self.isEnabled = function() {
+            return true;
+        };
+        self.getController = function(module, courseid) {
+            return function($scope) {
+                $scope.icon = $mmCourse.getModuleIconSrc('url');
+                $scope.title = module.name;
+
+                $scope.action = function(e) {
+                    $state.go('site.mod_opencast', {module: module, courseid: courseid});
+                };
+                if (module.contents && module.contents[0] && module.contents[0].fileurl) {
+                    $scope.buttons = [{
+                        icon: 'ion-link',
+                        label: 'mm.core.openinbrowser',
+                        action: function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            $mmaModUrl.logView(module.instance).then(function() {
+                                $mmCourse.checkModuleCompletion(courseid, module.completionstatus);
+                            });
+                            $mmaModUrl.open(module.contents[0].fileurl);
+                        }
+                    }];
+                }
+            };
+        };
+        return self;
+    }]);
+
 angular.module('mm.addons.mod_flexpaper')
     .factory('$mmaModFlexpaper', ["$mmSite", "$mmUtil", "$q", function($mmSite, $mmUtil, $q) {
         var self = {};
