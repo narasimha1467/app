@@ -2,7 +2,7 @@
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
         
-       <a href="{{vurl}}" id="embedURL" onclick="window.plugins.childBrowser.showWebPage(encodeURI('+{{ vurl }}+'));">Download file</a>
-
+       <a id="embedURL" ng-click="window.open(vurl, '_blank', 'location=no');">Download file</a>
+{{ vurl }}
     </ion-content>
 </ion-view>
