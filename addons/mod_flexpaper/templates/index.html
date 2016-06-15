@@ -1,8 +1,7 @@
 <ion-view>
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
+        <iframe ng-src="{{vurl}}"></iframe>
         
-       <a id="embedURL" onclick="window.open(vurl, '_blank', 'location=no');">Download file</a>
-{{ vurl }}
     </ion-content>
 </ion-view>
