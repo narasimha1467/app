@@ -11749,6 +11749,7 @@ angular.module('mm.addons.mod_flexpaper')
 
             stdetails = vurls;
             $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
+            $scope.urlid= module.instance
             //$scope.type=stdetails.mimetype;
         });
 
