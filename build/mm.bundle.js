@@ -11747,8 +11747,7 @@ angular.module('mm.addons.mod_flexpaper')
             //storeCoursesInMemory(attendence);
             //console.log("vurls - "+vurls);
 
-            stdetails = vurls;
-            $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
+           
             $scope.urlid= module.instance
             //$scope.type=stdetails.mimetype;
         });
