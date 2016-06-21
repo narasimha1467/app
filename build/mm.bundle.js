@@ -11743,14 +11743,8 @@ angular.module('mm.addons.mod_flexpaper')
         };
 
         var presets = {};
-        return $mmSite.read('local_mobile_flexpaper', data, presets).then(function (vurls) {
-            //storeCoursesInMemory(attendence);
-            //console.log("vurls - "+vurls);
-
-           
-            $scope.urlid= module.instance
-            //$scope.type=stdetails.mimetype;
-        });
+        var moduledetails= module.completionstatus;
+        return $scope.id=moduledetails.cmid;
 
     }]);
 
