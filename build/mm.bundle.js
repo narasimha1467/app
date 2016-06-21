@@ -11743,8 +11743,8 @@ angular.module('mm.addons.mod_flexpaper')
         };
 
         var presets = {};
-        var moduledetails= module.completionstatus;
-        return $scope.id=moduledetails.cmid;
+        //var moduledetails= module.completionstatus;
+        return $scope.id=module.id;
 
     }]);
 
