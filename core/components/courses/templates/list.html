@@ -6,7 +6,7 @@
         <mm-loading hide-until="coursesLoaded">
            
             <section ng-repeat="course in courses | filter:{fullname: filterText}" class="list card">
-            	<div ng-if="course.id !=0">
+            
                  <a class="item" ui-sref="site.mm_course({course: course})" title="{{course.fullname}}">
                     <h2 class="courses_name"><mm-format-text watch="true">{{course.fullname}}</mm-format-text></h2>
                 
@@ -15,7 +15,7 @@
                    
                
 				</a>
-		</div>
+	
             </section>
 		
         </mm-loading>
