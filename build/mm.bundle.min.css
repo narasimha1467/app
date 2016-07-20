@@ -8,7 +8,7 @@
 .home_image_row1 {width: 50%;height: auto;float: left;border: 1px solid #9f1c32;}
 .home_image_row2 {width: 50%;height: auto;float: left;border: 1px solid #9f1c32;}
 .home_image_row3 {width: 50%;height: auto;float: left;border: 1px solid #9f1c32;}
-.home_image_row4 {width: 50%;height: auto;float: left;border: 1px solid #9f1c32;}
+.home_image_row4 {width: 25%;height: auto;float: left;border: 1px solid #9f1c32;}
 .instructor_name {color: #000;font-weight: bold;}
 .label_attendence {width: 60%;float: left;color: #000;font-weight: 600;}
 .attendence_details{padding:0%;}

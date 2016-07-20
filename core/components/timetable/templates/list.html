@@ -1,19 +1,29 @@
-<ion-view view-title="Today's Timetable" onload="refreshTimetable()">
-    <ion-content padding="true">
-        <!-- ion-refresher needs to be direct child of ion-content to work with native scrolling -->
-        <ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="timetableLoaded" on-refresh="refreshTimetable()">
-        </ion-refresher>
+<ion-view view-title="Home" onload="refreshTimetable()">
+	<ion-content padding="true">
+		<!-- ion-refresher needs to be direct child of ion-content to work with native scrolling -->
+		<ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="timetableLoaded" on-refresh="refreshTimetable()">
+		</ion-refresher>
+		<img src="img/logos/{{siteinfo.sitename}}.png" class="course_image">
+		<section class="student_details">
+			<h5>Hi {{siteinfo.fullname}}, Welcome to MYDY</h5>
+
+		</section>
+
 		<table width="100%" class="timetable_table">
 			<tr width="100%" class="timetable_tr" ng-repeat="timetable in timetable">
 				<td class="timetable_td">
 					<div class="time_timetable"><div class="side_heading">Timings</div><div>{{timetable.classtime_start}}</div><div>to</div><div>{{timetable.classtime_end}}</div></div>
 					<div class="course_timetable"><div class="timetable_details"><div class="timetable_instructor"><span class="side_heading">Class Name</span></div><div class="timetable_instructor"><span class="side_heading">Class Type</span></div></div>
-					<div class="timetable_details"><div class="timetable_instructor timetable_course">{{timetable.classcode}}</div><div class="timetable_instructor">{{timetable.classtype}}</div></div>
-					<div class="timetable_details"><div class="timetable_instructor"><span class="side_heading">Instructorname</span></div><div class="timetable_instructor"><span class="side_heading">Class Room</span></div></div>
-					<div class="timetable_details"><div class="timetable_instructor">{{timetable.instructorname}}</div><div class="timetable_instructor">{{timetable.classroom}}</div></div></div>
+						<div class="timetable_details"><div class="timetable_instructor timetable_course">{{timetable.classcode}}</div><div class="timetable_instructor">{{timetable.classtype}}</div></div>
+						<div class="timetable_details"><div class="timetable_instructor"><span class="side_heading">Instructorname</span></div><div class="timetable_instructor"><span class="side_heading">Class Room</span></div></div>
+						<div class="timetable_details"><div class="timetable_instructor">{{timetable.instructorname}}</div><div class="timetable_instructor">{{timetable.classroom}}</div></div></div>
 				</td>
 			</tr>
-		</table>	
-      
-    </ion-content>
+		</table>
+		<a menu-close  ui-sref="site.mm_courses" title="{{ 'mm.sidemenu.mycourses' | translate}}">  <img src="img/courses.png" class="home_image_row4">  </a>
+		<a menu-close ui-sref="site.mm_attendence" title="{{ 'mm.sidemenu.calender' | translate}}">	  <img src="img/attendence.png" class="home_image_row4"> </a>
+		<a menu-close  ui-sref="site.mm_anouncement" title="{{ 'mm.sidemenu.calender' | translate}}"><img src="img/announcements.png" class="home_image_row4"> </a>
+		<a menu-close  ui-sref="site.calendar" title="{{ 'mm.sidemenu.calender' | translate}}">	<img src="img/calender.png" class="home_image_row4"> </a>
+
+	</ion-content>
 </ion-view>

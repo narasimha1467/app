@@ -1,0 +1,75 @@
+<ion-view view-title="Profile" onload="refreshUserprofile()">
+	<ion-content padding="true">
+		<!-- ion-refresher needs to be direct child of ion-content to work with native scrolling -->
+		<ion-refresher pulling-text="{{ 'mm.core.pulltorefresh' | translate }}" ng-if="userprofileLoaded" on-refresh="refreshUserprofile()">
+		</ion-refresher>
+		<div ng-repeat="userprofile in userprofile">
+		<div class="item" ng-if="userprofile.firstname">
+			<p class="item-heading">First Name</p>
+			<p>
+
+					<mm-format-text>{{userprofile.firstname}}</mm-format-text>
+
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.lastname">
+			<p class="item-heading">Last Name</p>
+			<p>
+
+					<mm-format-text>{{userprofile.lastname}}</mm-format-text>
+
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.dob">
+			<p class="item-heading">Date of Birth</p>
+			<p>
+
+					<mm-format-text>{{userprofile.dob}}</mm-format-text>
+
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.rollid">
+			<p class="item-heading">Roll Id</p>
+			<p>
+				<a href="" mm-browser>
+					<mm-format-text>{{userprofile.email}}</mm-format-text>
+				</a>
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.phonenumber">
+			<p class="item-heading">{{ 'mm.user.phone1' | translate}}</p>
+			<p>
+				<a href="tel:{{userprofile.phonenumber}}" mm-browser>
+					<mm-format-text watch="true" clean="true">{{userprofile.phonenumber}}</mm-format-text>
+				</a>
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.city">
+			<p class="item-heading">{{ 'mm.user.city' | translate}}</p>
+			<p>
+				<mm-format-text watch="true" clean="true">{{userprofile.city}}</mm-format-text>
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.fathername">
+			<p class="item-heading">Father Name</p>
+			<p>
+				<mm-format-text watch="true" clean="true">{{userprofile.fathername}}</mm-format-text>
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.mothername">
+			<p class="item-heading">Mother Name</p>
+			<p>
+
+					<mm-format-text watch="true" clean="true">{{userprofile.mothername}}</mm-format-text>
+
+			</p>
+		</div>
+		<div class="item" ng-if="userprofile.town">
+			<p class="item-heading">Town</p>
+			<p>
+				<mm-format-text watch="true" clean="true">{{userprofile.town}}</mm-format-text>
+			</p>
+		</div>
+		</div>
+	</ion-content>
+</ion-view>

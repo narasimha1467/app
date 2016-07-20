@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.files','mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
+angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.files','mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
 .run(["$ionicPlatform", function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -4292,6 +4292,19 @@ angular.module('mm.core.timetable', [])
         }
     });
 }])
+angular.module('mm.core.userprofile', [])
+    .config(["$stateProvider", function($stateProvider) {
+        $stateProvider
+            .state('site.mm_userprofile', {
+                url: '/mm_userprofile',
+                views: {
+                    'site': {
+                        templateUrl: 'core/components/userprofile/templates/list.html',
+                        controller: 'mmUserprofileListCtrl'
+                    }
+                }
+            });
+    }])
 angular.module('mm.core.anouncement', [])
 .config(["$stateProvider", function($stateProvider) {
     $stateProvider
@@ -5383,7 +5396,7 @@ angular.module('mm.core.timetable')
         siteid = siteid || $mmSite.getId();
         var userid = $mmSite.getUserId(),
             presets = {},
-			
+
             data = {userid: userid};
         if (typeof userid === 'undefined') {
             return $q.reject();
@@ -5397,9 +5410,58 @@ angular.module('mm.core.timetable')
                 return timetable;
             });
         });
-		 };	
+		 };
     return self;
 }]);
+angular.module('mm.core.userprofile')
+    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$mmUtil", function($scope, $mmUserprofile,$mmUtil) {
+        function fetchUserprofile(refresh) {
+            return $mmUserprofile.getUserUserprofile(refresh).then(function(userprofile) {
+                $scope.userprofile = userprofile;
+            }, function(error) {
+                if (typeof error != 'undefined' && error !== '') {
+                    $mmUtil.showErrorModal(error);
+                } else {
+                    $mmUtil.showErrorModal('mm.courses.errorloadcourses', true);
+                }
+            });
+        }
+        fetchUserprofile().finally(function() {
+            $scope.userprofileLoaded = true;
+        });
+        $scope.refreshUserprofile = function() {
+            fetchUserprofile(true).finally(function() {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+
+    }]);
+
+angular.module('mm.core.userprofile')
+    .factory('$mmUserprofile', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+        var self = {},
+            currentUserprofile = {};
+        self.getUserUserprofile = function(refresh, siteid) {
+            siteid = siteid || $mmSite.getId();
+            var userid = $mmSite.getUserId(),
+                presets = {},
+
+                data = {userid: userid};
+            if (typeof userid === 'undefined') {
+                return $q.reject();
+            }
+            if (refresh) {
+                presets.getFromCache = false;
+            }
+            return $mmSitesManager.getSite(siteid).then(function(site) {
+                return site.read('local_user_details_custom', data, presets).then(function(userprofile) {
+                    //storeCoursesInMemory(attendence);
+                    return userprofile;
+                });
+            });
+        };
+        return self;
+    }]);
 angular.module('mm.core.anouncement')
 .controller('mmAnouncementListCtrl', ["$scope", "$mmAnouncement","$mmUtil", function($scope, $mmAnouncement,$mmUtil) {
     function fetchAnouncement(refresh) {
@@ -5472,7 +5534,7 @@ angular.module('mm.core.login')
             $mmSitesManager.newSite(siteurl, token).then(function() {
                 delete $scope.credentials;
                 $ionicHistory.nextViewOptions({disableBack: true});
-                $state.go('site.mm_home');
+                $state.go('site.mm_timetable');
             }, function(error) {
                 $mmUtil.showErrorModal(error);
             }).finally(function() {
@@ -5494,7 +5556,7 @@ angular.module('mm.core.login')
             disableBack: true
         });
         if ($mmSite.isLoggedIn()) {
-            $state.go('site.mm_home');
+            $state.go('site.mm_timetable');
         } else {
             $mmSitesManager.hasSites().then(function() {
                 return $state.go('mm_login.sites');
@@ -5536,7 +5598,7 @@ angular.module('mm.core.login')
                 $mmSitesManager.updateSiteInfoByUrl(infositeurl, username).finally(function() {
                     delete $scope.credentials;
                     $ionicHistory.nextViewOptions({disableBack: true});
-                    $state.go('site.mm_home');
+                    $state.go('site.mm_timetable');
                 });
             }, function(error) {
                 $mmUtil.showErrorModal('mm.login.errorupdatesite', true);
@@ -5599,7 +5661,7 @@ angular.module('mm.core.login')
             $mmSitesManager.getUserToken(sitedata.url, sitedata.username, sitedata.password).then(function(token) {
                 $mmSitesManager.newSite(sitedata.url, token).then(function() {
                     $ionicHistory.nextViewOptions({disableBack: true});
-                    $state.go('site.mm_home');
+                    $state.go('site.mm_timetable');
                 }, function(error) {
                     $mmUtil.showErrorModal(error);
                 }).finally(function() {
@@ -5683,7 +5745,7 @@ angular.module('mm.core.login')
         var modal = $mmUtil.showModalLoading();
         $mmSitesManager.loadSite(siteid).then(function() {
             $ionicHistory.nextViewOptions({disableBack: true});
-            $state.go('site.mm_home');
+            $state.go('site.mm_timetable');
         }, function(error) {
             $log.error('Error loading site '+siteid);
             error = error || 'Error loading site.';
@@ -11744,7 +11806,9 @@ angular.module('mm.addons.mod_flexpaper')
 
         var presets = {};
         //var moduledetails= module.completionstatus;
-        return $scope.id=module.id;
+        var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+        return $scope.id=$sce.trustAsResourceUrl(src);
+        //return $scope.id=;
 
     }]);
 

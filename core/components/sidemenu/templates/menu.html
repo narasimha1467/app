@@ -39,7 +39,7 @@
             <nav>
                 <ul class="list dark">
 					<li>
-                        <a menu-close class="item item-icon-left" ui-sref="site.mm_home" title="Home">
+                        <a menu-close class="item item-icon-left" ui-sref="site.mm_timetable" title="Home">
                             <i class="icon ion-ios-home-outline"></i>Home
                         </a>
                     </li>
@@ -54,13 +54,13 @@
                         </a>
                     </li>
 					<li>
-                        <a menu-close class="item item-icon-left" ui-sref="site.mm_timetable" title="Time Table">
-                            <i class="icon ion-clock"></i>Today's Timetable
-                        </a>
-                    </li>
-					<li>
                         <a menu-close class="item item-icon-left" ui-sref="site.mm_anouncement" title="Announcements">
                             <i class="icon ion-android-notifications-none"></i>Announcements
+                        </a>
+                    </li>
+                    <li>
+                        <a menu-close class="item item-icon-left" ui-sref="site.mm_userprofile" title="profile">
+                            <i class="icon ion-person"></i>Profile
                         </a>
                     </li>
                     <li ng-repeat="handler in handlers | orderBy:'-priority'" ng-controller="handler.controller" >
