@@ -47,8 +47,8 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <preference name="android-build-tool” value=“gradle” />
-<gap:plugin name=“cordova-plugin-admobpro” source=“npm” />
+    <preference name="android-build-tool" value="gradle" />
+                                                         
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true"/>
     </feature>
@@ -125,7 +125,7 @@
     <gap:plugin name="ionic-plugin-keyboard" source="npm" />
     <gap:plugin name="cordova-plugin-local-notifications-mm" source="npm" />
     <gap:plugin name="ch.ti8m.documenthandler" version="0.2.1" source="npm"/>
-
+        <gap:plugin name="cordova-plugin-admobpro" source="npm"/>
     <gap:config-file platform="android" parent="/manifest">
          <application android:debuggable="true" />
     </gap:config-file>
