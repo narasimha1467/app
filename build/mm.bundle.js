@@ -5635,6 +5635,7 @@ angular.module('mm.core.login')
 		var split=usernamesplit.substring(0,usernamesplit.indexOf("@"));
 		var newsplit=split.substring(split.length - 4, split.length);
 		var finalsplit=newsplit.substring(0, 2);
+
 		if(finalsplit=="bt"){
 			var url='http://btbi.moodlemenu.com';
 		}
@@ -5645,19 +5646,24 @@ angular.module('mm.core.login')
 			var url='http://mgmt.moodlemenu.com';
 		}
 		else{
-			 $mmUtil.showErrorModal('mm.login.siteurlrequired', true);
-            return;
+
+            var url='http://mydy.dypatil.edu/test';
+
+			 //$mmUtil.showErrorModal('mm.login.siteurlrequired', true);
+            //return;
 		}
 	 $scope.connect(url,usernamesplit);
 	 }
     $scope.connect = function(url,uname) {
-	
+
 			if (!url) {
+
             $mmUtil.showErrorModal('mm.login.siteurlrequired', true);
             return;
         }
         var modal = $mmUtil.showModalLoading();
         $mmSitesManager.getDemoSiteData(url).then(function(sitedata) {
+
             $mmSitesManager.getUserToken(sitedata.url, sitedata.username, sitedata.password).then(function(token) {
                 $mmSitesManager.newSite(sitedata.url, token).then(function() {
                     $ionicHistory.nextViewOptions({disableBack: true});
@@ -5672,8 +5678,11 @@ angular.module('mm.core.login')
                 $mmUtil.showErrorModal(error);
             });
         }, function() {
+
             $mmSitesManager.checkSite(url).then(function(result) {
+
                 if (result.warning) {
+
                     $mmUtil.showErrorModal(result.warning, true, 4000);
                 }
                 if ($mmLoginHelper.isSSOLoginNeeded(result.code)) {
@@ -5684,6 +5693,7 @@ angular.module('mm.core.login')
 						$state.go('mm_login.credentials', { siteurl: url, uname: uname });
                 }
             }, function(error) {
+                alert(error);
                 $mmUtil.showErrorModal(error);
             }).finally(function() {
                 modal.dismiss();
@@ -11798,17 +11808,24 @@ angular.module('mm.addons.mod_flexpaper')
             courseid = $stateParams.courseid;
         $scope.title = module.name;
         $scope.description = module.description;
-        $scope.url= module;
+        //return $scope.url= module;
         //var vurl=$mmCourse.getModuleFlexpaperurl(module.instance);
         var data = {
             flexpaperid: module.instance
         };
 
         var presets = {};
-        //var moduledetails= module.completionstatus;
+        $scope.openurl = function(url){
+            //var ref = cordova.InAppBrowser.open(url, target, options);
+            var ref=window.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
+
+            //ref.addEventListener("backbutton", function () { })
+        }
+
+        var moduledetails= module.completionstatus;
         var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+        $scope.siteinfo = $mmSite.getInfo();
         return $scope.id=$sce.trustAsResourceUrl(src);
-        //return $scope.id=;
 
     }]);
 
