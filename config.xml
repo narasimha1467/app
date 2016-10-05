@@ -47,8 +47,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <preference name="android-build-tool" value="gradle" />
-                                                         
+                                                            
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true"/>
     </feature>
