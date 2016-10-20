@@ -11816,9 +11816,10 @@ angular.module('mm.addons.mod_flexpaper')
 
         var presets = {};
         $scope.openurl = function(url){
-	alert('hi');
+	alert(url);
+	window.open('http://google.com','_system','location=yes'); 
             //var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
-            var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
+            //var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
 
             //ref.addEventListener("backbutton", function () { })
         }
