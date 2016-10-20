@@ -11818,7 +11818,7 @@ angular.module('mm.addons.mod_flexpaper')
         $scope.openurl = function(url){
 	alert('hi');
             //var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
-            //var ref=window.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
+            var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
 
             //ref.addEventListener("backbutton", function () { })
         }
