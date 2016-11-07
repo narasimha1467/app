@@ -11816,7 +11816,7 @@ angular.module('mm.addons.mod_flexpaper')
 
         var presets = {};
         $scope.openurl = function(url){
-	window.open(url,'_blank','location=no,closebuttoncaption=Close,toolbar=yes'); 
+	window.open(url,'_blank','location=yes,closebuttoncaption=Close,toolbar=yes'); 
             //var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
             //var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
 
