@@ -11760,7 +11760,7 @@ angular.module('mm.addons.mod_flexpaper')
         };
         self.getController = function(module, courseid) {
             return function($scope) {
-                $scope.icon = $mmCourse.getModuleIconSrc('url');
+                $scope.icon = $mmCourse.getModuleIconSrc('resource');
                 $scope.title = module.name;
 
                 $scope.action = function(e) {
