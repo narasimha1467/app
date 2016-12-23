@@ -11816,16 +11816,17 @@ angular.module('mm.addons.mod_flexpaper')
 
         var presets = {};
         $scope.openurl = function(url){
-	window.open(url,'_blank','location=yes,closebuttoncaption=Close,toolbar=yes'); 
+	window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
             //var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
             //var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
 
             //ref.addEventListener("backbutton", function () { })
         }
-
+	 var siteinfo = $mmSite.getInfo();
         var moduledetails= module.completionstatus;
-        var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
-        $scope.siteinfo = $mmSite.getInfo();
+	var src =  $mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id+"?uname="+siteinfo.username+"&wantsurl="+$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+        //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+       
         return $scope.id=$sce.trustAsResourceUrl(src);
 
     }]);
