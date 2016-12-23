@@ -8043,4 +8043,9 @@ input.mma-files-picker {
 
 .button.active, .button.activated {
   box-shadow: none;
-  color: #fff; }
+  color: #fff; 
+}
+.events_top {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
