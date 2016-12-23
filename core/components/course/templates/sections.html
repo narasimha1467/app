@@ -8,7 +8,7 @@
 				<tr width="100%" class="attendence_tr" ng-repeat="section in sections">
 					<td class="calender_td">
 						<a class="item announcement_div" mm-split-view-link="site.mm_course-section({courseid: courseid, coursecompletion: coursecompletion, sectionid: section.id})" title="{{section.name}}">
-							{{section.name}}
+							<mm-format-text watch="true"> {{section.name}} </mm-format-text>
 						</a>
 	
 	
