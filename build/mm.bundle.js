@@ -5650,11 +5650,7 @@ angular.module('mm.core.login')
 			var url='http://mgmt.moodlemenu.com';
 		}
 		else{
-
-            var url='http://mydy.dypatil.edu/dentistry';
-
-			 //$mmUtil.showErrorModal('mm.login.siteurlrequired', true);
-            //return;
+			var url='http://mydy.dypatil.edu/dentistry';
 		}
 	 $scope.connect(url,usernamesplit);
 	 }
