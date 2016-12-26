@@ -141,7 +141,7 @@ i.icon.ion-android-contact {width: 58px;float: left;font-size: 52px;border-radiu
 }
 .calender_td{width:100%;float:left;}
 .event_name{color:#A30D1D;}
-.events_top{margin-top:32px;}
+.events_top{margin-top:32px;margin-bottom:32px;}
 .announcement_div2 {
     width: 50%;
     float: left;
