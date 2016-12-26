@@ -5651,7 +5651,7 @@ angular.module('mm.core.login')
 		}
 		else{
 
-            var url='http://mydy.dypatil.edu/test';
+            var url='http://mydy.dypatil.edu/dentistry';
 
 			 //$mmUtil.showErrorModal('mm.login.siteurlrequired', true);
             //return;
