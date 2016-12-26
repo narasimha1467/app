@@ -11828,7 +11828,7 @@ angular.module('mm.addons.mod_flexpaper')
         }
 	 var siteinfo = $mmSite.getInfo();
         var moduledetails= module.completionstatus;
-	var src =  $mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id+"?uname='"+siteinfo.username+"'&wantsurl='"+$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id+"'";
+	var src =  $mmSite.getURL()+'/mod/flexpaper/mobileview.php?id='+module.id+'?uname="'+siteinfo.username+'"&wantsurl="'+$mmSite.getURL()+'/mod/flexpaper/mobileview.php?id='+module.id+'"';
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
        
         return $scope.id=$sce.trustAsResourceUrl(src);
