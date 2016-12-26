@@ -4880,7 +4880,11 @@ angular.module('mm.core.course')
         if (mods.indexOf(moduleName) < 0) {
             moduleName = "external-tool";
         }
-        return "img/mod/" + moduleName + ".svg";
+        if(moduleName=='flexpaper'){
+            return "img/mod/flexpaper.png";
+        }else{
+            return "img/mod/" + moduleName + ".svg";
+        }
     };
         self.getModulePreviousStatus = function(siteId, id) {
         return $mmSitesManager.getSite(siteId).then(function(site) {
