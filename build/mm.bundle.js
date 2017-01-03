@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
+angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_opencast','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
 .run(["$ionicPlatform", function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -1384,11 +1384,11 @@ angular.module('mm.core')
         });
     }
         self.createDir = function(path, failIfExists) {
-        failIfExists = failIfExists || false;
+        failIfExists = failIfExists || false;
         return create(true, path, failIfExists);
     };
         self.createFile = function(path, failIfExists) {
-        failIfExists = failIfExists || false;
+        failIfExists = failIfExists || false;
         return create(false, path, failIfExists);
     };
         self.removeDir = function(path) {
@@ -2405,7 +2405,7 @@ angular.module('mm.core')
             return $mmConfig.get('wsextservice').then(function(service) {
                 return $http.post(siteurl + '/local/mobile/check.php', {service: service}).then(function(response) {
                     var data = response.data;
-                    if (typeof data == 'undefined' || typeof data.code == 'undefined') {
+                    if (typeof data == 'undefined' || typeof data.code == 'undefined') {
                         return {code: 0, warning: 'mm.login.localmobileunexpectedresponse'};
                     }
                     var code = parseInt(data.code, 10);
@@ -3293,7 +3293,7 @@ angular.module('mm.core')
             return countryName !== countryKey ? countryName : code;
         };
                 self.getDocsUrl = function(release, page) {
-            page = page || 'Mobile_app';
+            page = page || 'Mobile_app';
             var docsurl = 'https://docs.moodle.org/en/' + page;
             if (typeof release != 'undefined') {
                 var version = release.substr(0, 3).replace(".", "");
@@ -3759,9 +3759,9 @@ angular.module('mm.core')
 .directive('mmFile', ["$q", "$mmUtil", "$mmFilepool", "$mmSite", "$mmApp", "$mmEvents", function($q, $mmUtil, $mmFilepool, $mmSite, $mmApp, $mmEvents) {
         function getState(scope, siteid, fileurl, timemodified) {
         return $mmFilepool.getFileStateByUrl(siteid, fileurl, timemodified).then(function(state) {
-            scope.isDownloaded = state === $mmFilepool.FILEDOWNLOADED || state === $mmFilepool.FILEOUTDATED;
+            scope.isDownloaded = state === $mmFilepool.FILEDOWNLOADED || state === $mmFilepool.FILEOUTDATED;
             scope.isDownloading = state === $mmFilepool.FILEDOWNLOADING;
-            scope.showDownload = state === $mmFilepool.FILENOTDOWNLOADED || state === $mmFilepool.FILEOUTDATED;
+            scope.showDownload = state === $mmFilepool.FILENOTDOWNLOADED || state === $mmFilepool.FILEOUTDATED;
         });
     }
         function downloadFile(scope, siteid, fileurl, component, componentid, timemodified) {
@@ -3786,7 +3786,7 @@ angular.module('mm.core')
             file: '='
         },
         link: function(scope, element, attrs) {
-            var fileurl = scope.file.fileurl || scope.file.url,
+            var fileurl = scope.file.fileurl || scope.file.url,
                 filename = scope.file.filename,
                 timemodified = attrs.timemodified || 0,
                 siteid = $mmSite.getId(),
@@ -4035,7 +4035,7 @@ angular.module('mm.core')
             angular.element(element.querySelectorAll('[mm-split-view-link]')).removeClass('mm-split-item-selected');
         };
                 this.getMenuState = function() {
-            return menuState || $state.current.name;
+            return menuState || $state.current.name;
         };
                 this.loadLink = function(retrying) {
             if ($ionicPlatform.isTablet()) {
@@ -4789,7 +4789,7 @@ angular.module('mm.core.course')
     var self = {},
         mods = ["assign", "assignment", "book", "chat", "choice", "data", "database", "date", "external-tool",
             "feedback", "file", "folder", "forum", "glossary", "ims", "imscp", "label", "lesson", "lti", "page", "quiz",
-            "resource", "scorm", "survey", "url", "wiki", "workshop","flexpaper"
+            "resource", "scorm", "survey", "url", "wiki", "workshop","flexpaper","opencast"
         ];
         self.checkModuleCompletion = function(courseId, completion) {
         if (completion && completion.tracking === 2 && completion.state === 0) {
@@ -4890,7 +4890,7 @@ angular.module('mm.core.course')
         return $mmSitesManager.getSite(siteId).then(function(site) {
             var db = site.getDb();
             return db.get(mmCoreCourseModulesStore, id).then(function(module) {
-                return module.previous || $mmFilepool.FILENOTDOWNLOADED;
+                return module.previous || $mmFilepool.FILENOTDOWNLOADED;
             }, function() {
                 return $mmFilepool.FILENOTDOWNLOADED;
             });
@@ -6496,7 +6496,7 @@ angular.module('mm.addons.files', ['mm.core'])
         })
         .state('site.files-choose-site', {
             url: '/choose-site',
-            params: {
+            params: {
                 file: null
             },
             views: {
@@ -6888,7 +6888,27 @@ angular.module('mm.addons.mod_resource', ['mm.core'])
 .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
     $mmCourseDelegateProvider.registerContentHandler('mmaModResource', 'resource', '$mmaModResourceCourseContentHandler');
 }]);
+angular.module('mm.addons.mod_opencast', ['mm.core'])
+    .config(["$stateProvider", function($stateProvider) {
+        $stateProvider
+            .state('site.mod_opencast', {
+                url: '/mod_opencast',
+                params: {
+                    module: null,
+                    courseid: null
+                },
+                views: {
+                    'site': {
+                        controller: 'mmaModOpencastIndexCtrl',
+                        templateUrl: 'addons/mod_opencast/templates/index.html'
+                    }
+                }
+            });
+    }])
 
+    .config(["$mmCourseDelegateProvider", function($mmCourseDelegateProvider) {
+        $mmCourseDelegateProvider.registerContentHandler('mmaModOpencast', 'opencast', '$mmaModOpencastCourseContentHandler');
+    }]);
 angular.module('mm.addons.mod_flexpaper', ['mm.core'])
     .config(["$stateProvider", function($stateProvider) {
         $stateProvider
@@ -7577,7 +7597,7 @@ angular.module('mm.addons.calendar')
 }]);
 angular.module('mm.addons.files')
 .controller('mmaFilesChooseSiteCtrl', ["$scope", "$state", "$stateParams", "$mmSitesManager", "$mmaFilesHelper", "$ionicHistory", function($scope, $state, $stateParams, $mmSitesManager, $mmaFilesHelper, $ionicHistory) {
-    var fileEntry = $stateParams.file || {};
+    var fileEntry = $stateParams.file || {};
     $scope.filename = fileEntry.name;
     $mmSitesManager.getSites().then(function(sites) {
         $scope.sites = sites;
@@ -7777,7 +7797,7 @@ angular.module('mm.addons.files')
                     $mmApp.getDB().get(mmaFilesSharedFilesStore, fileId).then(function() {
                         $log.debug('Delete already treated file: ' + entry.name);
                         fileDeferred.resolve();
-                        entry.remove(function() {
+                        entry.remove(function() {
                             $log.debug('File deleted: ' + entry.name);
                             $mmApp.getDB().remove(mmaFilesSharedFilesStore, fileId).then(function() {
                                 $log.debug('"Treated" mark removed from file: ' + entry.name);
@@ -9615,7 +9635,7 @@ angular.module('mm.addons.mod_choice')
                     }
                 }
             });
-            $scope.canEdit = choice.allowupdate || !hasAnswered;
+            $scope.canEdit = choice.allowupdate || !hasAnswered;
             $scope.options = options;
         });
     }
@@ -11494,7 +11514,7 @@ angular.module('mm.addons.mod_resource')
                     $mmaModResource.getFileEventNames(module).then(function(eventNames) {
                         addObservers(eventNames, true);
                     });
-                    if ($mmaModResource.isDisplayedInIframe(module) || $mmaModResource.isDisplayedInline(module)) {
+                    if ($mmaModResource.isDisplayedInIframe(module) || $mmaModResource.isDisplayedInline(module)) {
                         $mmCourse.storeModuleStatus(siteid, module.id, $mmFilepool.FILEDOWNLOADING, revision, timemodified);
                         showDownloading();
                     }
@@ -11752,6 +11772,80 @@ angular.module('mm.addons.mod_resource')
     };
     return self;
 }]);
+
+angular.module('mm.addons.mod_opencast')
+    .factory('$mmaModOpencastCourseContentHandler', ["$mmCourse", "$mmaModOpencast", "$state", function($mmCourse, $mmaModOpencast, $state) {
+        var self = {};
+        self.isEnabled = function() {
+            return true;
+        };
+        self.getController = function(module, courseid) {
+            return function($scope) {
+                $scope.icon = $mmCourse.getModuleIconSrc('url');
+                $scope.title = module.name;
+
+                $scope.action = function(e) {
+                    $state.go('site.mod_opencast', {module: module, courseid: courseid});
+                };
+                if (module.contents && module.contents[0] && module.contents[0].fileurl) {
+                    $scope.buttons = [{
+                        icon: 'ion-link',
+                        label: 'mm.core.openinbrowser',
+                        action: function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            $mmaModUrl.logView(module.instance).then(function() {
+                                $mmCourse.checkModuleCompletion(courseid, module.completionstatus);
+                            });
+                            $mmaModUrl.open(module.contents[0].fileurl);
+                        }
+                    }];
+                }
+            };
+        };
+        return self;
+    }]);
+
+angular.module('mm.addons.mod_opencast')
+    .factory('$mmaModOpencast', ["$mmSite", "$mmUtil", "$q", function($mmSite, $mmUtil, $q) {
+        var self = {};
+        self.logView = function(id) {
+            if (id) {
+                var params = {
+                    urlid: id
+                };
+                return $mmSite.write('mod_url_view_url', params);
+            }
+            return $q.reject();
+        };
+        self.open = function(url) {
+            $mmUtil.openInBrowser(url);
+        };
+        return self;
+    }]);
+angular.module('mm.addons.mod_opencast')
+    .controller('mmaModOpencastIndexCtrl', ["$scope","$mmSite", "$mmSitesManager", "$stateParams", "$mmaModOpencast", "$mmCourse", "$sce", function($scope, $mmSite, $mmSitesManager, $stateParams, $mmaModOpencast, $mmCourse, $sce) {
+        var module = $stateParams.module || {},
+            courseid = $stateParams.courseid;
+        $scope.title = module.name;
+        $scope.description = module.description;
+        $scope.url= module;
+        //var vurl=$mmCourse.getModuleOpencasturl(module.instance);
+        var data = {
+            opencastid: module.instance
+        };
+
+        var presets = {};
+        return $mmSite.read('local_mobile_opencast', data, presets).then(function (vurls) {
+            //storeCoursesInMemory(attendence);
+            //console.log("vurls - "+vurls);
+
+            stdetails = vurls;
+            $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
+            $scope.type=stdetails.mimetype;
+        });
+
+    }]);
 angular.module('mm.addons.mod_flexpaper')
     .factory('$mmaModFlexpaperCourseContentHandler', ["$mmCourse", "$mmaModFlexpaper", "$state", function($mmCourse, $mmaModFlexpaper, $state) {
         var self = {};
