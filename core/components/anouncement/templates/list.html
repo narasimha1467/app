@@ -7,13 +7,13 @@
 		
 				<table width="100%" class="timetable_table events_top" >
 			<tr width="100%" class="attendence_tr" ng-repeat="anouncement in anouncement">
-				<td class="calender_td">
+				<a ng-click="openurlannouncement('{{anouncement.postid}}');"><td class="calender_td">
 	<div class="announcement_div">
 						{{anouncement.subject}}
 					</div>
 	<div class="announcement_div"><div class="announcement_div2"><span class="side_heading">Posted By:</span>{{anouncement.postuser_name}}</div><div class="announcement_div2"><span class="side_heading">Posted On:</span>{{anouncement.created_date}}</div></div>
 	
-	</td>
+					</td></a>
 	</tr>
 </table>
 	<a ui-sref="site.mm_anouncementall" title="Announcements">View More</a>
