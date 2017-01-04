@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_opencast','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
+angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.anouncementall','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_opencast','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
 .run(["$ionicPlatform", function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -4318,7 +4318,19 @@ angular.module('mm.core.anouncement', [])
         }
     });
 }])
-
+angular.module('mm.core.anouncementall', [])
+.config(["$stateProvider", function($stateProvider) {
+    $stateProvider
+    .state('site.mm_anouncementall', {
+        url: '/mm_anouncementall',
+        views: {
+            'site': {
+                templateUrl: 'core/components/anouncementall/templates/list.html',
+				controller: 'mmAnouncementallListCtrl'
+            }
+        }
+    });
+}])
 angular.module('mm.core.login', [])
 .config(["$stateProvider", "$urlRouterProvider", "$mmInitDelegateProvider", "mmInitDelegateMaxAddonPriority", function($stateProvider, $urlRouterProvider, $mmInitDelegateProvider, mmInitDelegateMaxAddonPriority) {
     $stateProvider
@@ -5510,6 +5522,55 @@ angular.module('mm.core.anouncement')
             return site.read('local_user_announcements_custom', data, presets).then(function(anouncement) {
                 //storeCoursesInMemory(attendence);
                 return anouncement;
+            });
+        });
+		 };	
+    return self;
+}]);
+angular.module('mm.core.anouncementall')
+.controller('mmAnouncementallListCtrl', ["$scope", "$mmAnouncementall","$mmUtil", function($scope, $mmAnouncementall,$mmUtil) {
+    function fetchAnouncementall(refresh) {
+		 return $mmAnouncementall.getUserAnouncementall(refresh).then(function(anouncementall) {
+            $scope.anouncementall = anouncementall;
+          }, function(error) {
+            if (typeof error != 'undefined' && error !== '') {
+                $mmUtil.showErrorModal(error);
+            } else {
+                $mmUtil.showErrorModal('mm.courses.errorloadcourses', true);
+            }
+        });
+    }
+	fetchAnouncementall().finally(function() {
+        $scope.anouncementLoaded = true;
+    });
+	 $scope.refreshAnouncementall = function() {
+        fetchAnouncementall(true).finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+}]);
+
+angular.module('mm.core.anouncementall')
+.factory('$mmAnouncementall', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+    var self = {},
+	currentAnouncementall = {};
+         self.getUserAnouncementall = function(refresh, siteid) {
+        siteid = siteid || $mmSite.getId();
+        var userid = $mmSite.getUserId(),
+            presets = {},
+			
+            data = {userid: userid};
+        if (typeof userid === 'undefined') {
+            return $q.reject();
+        }
+        if (refresh) {
+            presets.getFromCache = false;
+        }
+        return $mmSitesManager.getSite(siteid).then(function(site) {
+            return site.read('local_user_announcementsall_custom', data, presets).then(function(anouncement) {
+                //storeCoursesInMemory(attendence);
+                return anouncementall;
             });
         });
 		 };	
