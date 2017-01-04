@@ -177,5 +177,10 @@ i.icon.ion-android-contact {width: 58px;float: left;font-size: 52px;border-radiu
     height: auto;
     /* margin-left: 32%; */
   }
-
+ .scroll-content {
+    background-image: url(../img/bg.png);
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: 60%;
+}
 }
