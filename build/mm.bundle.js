@@ -5522,7 +5522,7 @@ angular.module('mm.core.anouncement')
           var src =  $mmSite.getURL()+'/mod/forum/discuss.php?d='+id;
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
        
-        return $scope.url=$sce.trustAsResourceUrl(src);
+      	var url=$sce.trustAsResourceUrl(src);
         window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
            
         }
