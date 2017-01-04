@@ -7,7 +7,7 @@
 		
 				<table width="100%" class="timetable_table events_top" >
 			<tr width="100%" class="attendence_tr" ng-repeat="anouncement in anouncement">
-				<a ng-click="openurlannouncement('{{anouncement.postid}}');"><td class="calender_td">
+				<a ng-click="openurlannouncement({{anouncement.postid}});"><td class="calender_td">
 	<div class="announcement_div">
 						{{anouncement.subject}}
 					</div>
