@@ -5479,7 +5479,7 @@ angular.module('mm.core.userprofile')
         return self;
     }]);
 angular.module('mm.core.anouncement')
-.controller('mmAnouncementListCtrl', ["$scope", "$mmAnouncement","$mmUtil", function($scope, $mmAnouncement,$mmUtil) {
+.controller('mmAnouncementListCtrl', ["$scope", "$mmAnouncement","$mmUtil","$sce", function($scope, $mmAnouncement,$mmUtil,$sce) {
     function fetchAnouncement(refresh) {
 		 return $mmAnouncement.getUserAnouncement(refresh).then(function(anouncement) {
             $scope.anouncement = anouncement;
@@ -5499,11 +5499,18 @@ angular.module('mm.core.anouncement')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-
+	$scope.openurlannouncement = function(id){
+          var src =  $mmSite.getURL()+'/mod/forum/discuss.php?d='+id;
+        //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+       
+      	var url=$sce.trustAsResourceUrl(src);
+        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
+           
+        }
 }]);
 
 angular.module('mm.core.anouncement')
-.factory('$mmAnouncement', ["$scope","$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+.factory('$mmAnouncement', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
     var self = {},
 	currentAnouncement = {};
          self.getUserAnouncement = function(refresh, siteid) {
@@ -5518,14 +5525,7 @@ angular.module('mm.core.anouncement')
         if (refresh) {
             presets.getFromCache = false;
         }
-         $scope.openurlannouncement = function(id){
-          var src =  $mmSite.getURL()+'/mod/forum/discuss.php?d='+id;
-        //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
-       
-      	var url=$sce.trustAsResourceUrl(src);
-        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
-           
-        }
+         
         return $mmSitesManager.getSite(siteid).then(function(site) {
             return site.read('local_user_announcements_custom', data, presets).then(function(anouncement) {
                 //storeCoursesInMemory(attendence);
