@@ -5500,7 +5500,7 @@ angular.module('mm.core.anouncement')
         });
     };
 	$scope.openurlannouncement = function(id){
-          var src =  $mmSite.getURL()+'/mod/forum/discuss.php?d='+id;
+          var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id;
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
        
       	var url=$sce.trustAsResourceUrl(src);
