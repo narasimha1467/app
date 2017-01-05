@@ -6,12 +6,12 @@
 		
 		
 				<table width="100%" class="timetable_table events_top" >
-			<tr width="100%" class="attendence_tr" ng-repeat="anouncementall in anouncement">
+			<tr width="100%" class="attendence_tr" ng-repeat="anouncementall in anouncementall">
 				<td class="calender_td">
-	<a ng-click="openurlannouncement({{anouncement.postid}});"><div class="announcement_div">
-						{{anouncement.subject}}
+	<a ng-click="openurlannouncement({{anouncementall.postid}});"><div class="announcement_div">
+						{{anouncementall.subject}}
 					</div></a>
-	<div class="announcement_div"><div class="announcement_div2"><span class="side_heading">Posted By:</span>{{anouncement.postuser_name}}</div><div class="announcement_div2"><span class="side_heading">Posted On:</span>{{anouncement.created_date}}</div></div>
+	<div class="announcement_div"><div class="announcement_div2"><span class="side_heading">Posted By:</span>{{anouncementall.postuser_name}}</div><div class="announcement_div2"><span class="side_heading">Posted On:</span>{{anouncementall.created_date}}</div></div>
 	
 					</td>
 	</tr>
