@@ -5576,7 +5576,7 @@ angular.module('mm.core.anouncementall')
             presets.getFromCache = false;
         }
         return $mmSitesManager.getSite(siteid).then(function(site) {
-            return site.read('local_user_announcementsall_custom', data, presets).then(function(anouncement) {
+            return site.read('local_user_announcementsall_custom', data, presets).then(function(anouncementall) {
                 //storeCoursesInMemory(attendence);
                 return anouncementall;
             });
