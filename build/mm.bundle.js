@@ -5479,7 +5479,7 @@ angular.module('mm.core.userprofile')
         return self;
     }]);
 angular.module('mm.core.anouncement')
-.controller('mmAnouncementListCtrl', ["$scope", "$mmAnouncement","$mmUtil","$sce", function($scope, $mmAnouncement,$mmUtil,$sce) {
+.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$mmUtil","$sce", function($scope,$mmSite, $mmAnouncement,$mmUtil,$sce) {
     function fetchAnouncement(refresh) {
 		 return $mmAnouncement.getUserAnouncement(refresh).then(function(anouncement) {
             $scope.anouncement = anouncement;
