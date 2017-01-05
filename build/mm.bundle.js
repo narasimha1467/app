@@ -5536,7 +5536,7 @@ angular.module('mm.core.anouncement')
     return self;
 }]);
 angular.module('mm.core.anouncementall')
-.controller('mmAnouncementallListCtrl', ["$scope", "$mmAnouncementall","$mmUtil", function($scope, $mmAnouncementall,$mmUtil) {
+.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$mmUtil","$sce", function($scope,$mmSite, $mmAnouncementall,$mmUtil,$sce) {
     function fetchAnouncementall(refresh) {
 		 return $mmAnouncementall.getUserAnouncementall(refresh).then(function(anouncementall) {
             $scope.anouncementall = anouncementall;
@@ -5556,7 +5556,14 @@ angular.module('mm.core.anouncementall')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-
+	$scope.openurlannouncementall = function(id){
+          var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id;
+        //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+       
+      	var url=$sce.trustAsResourceUrl(src);
+        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
+           
+        }
 }]);
 
 angular.module('mm.core.anouncementall')
