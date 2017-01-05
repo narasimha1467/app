@@ -5500,7 +5500,8 @@ angular.module('mm.core.anouncement')
         });
     };
 	$scope.openurlannouncement = function(id){
-          var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id;
+		var siteinfo = $mmSite.getInfo();
+	        var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id+'&uname='+siteinfo.username;
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
        
       	var url=$sce.trustAsResourceUrl(src);
@@ -5557,8 +5558,8 @@ angular.module('mm.core.anouncementall')
         });
     };
 	$scope.openurlannouncementall = function(id){
-          var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id;
-        //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
+         	var siteinfo = $mmSite.getInfo();
+	        var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id+'&uname='+siteinfo.username;
        
       	var url=$sce.trustAsResourceUrl(src);
         window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
