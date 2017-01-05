@@ -8049,3 +8049,16 @@ input.mma-files-picker {
     margin-top: 32px;
     margin-bottom: 32px;
 }
+@media screen and (orientation:landscape) {
+    .course_image {
+    width: 30%;
+    height: auto;
+    /* margin-left: 32%; */
+  }
+ .scroll-content {
+    background-image: url(../img/bg.png);
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: 60%;
+}
+}
