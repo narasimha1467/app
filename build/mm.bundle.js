@@ -5727,7 +5727,7 @@ angular.module('mm.core.login')
 			var url='http://mgmt.moodlemenu.com';
 		}
 		else{
-			var url='http://mydy.dypatil.edu/test';
+			var url='http://mydy.dypatil.edu/dentistry';
 		}
 	 $scope.connect(url,usernamesplit);
 	 }
