@@ -1,7 +1,6 @@
 <ion-view>
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
-        <video src="{{ vurl }}" onclick="this.play();" controls/>
-
+        <iframe class="widget" width="384" height="505" src="{{ opencasturl }}"></iframe>
     </ion-content>
 </ion-view>
