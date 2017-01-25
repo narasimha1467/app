@@ -11919,10 +11919,11 @@ angular.module('mm.addons.mod_opencast')
 
             stdetails = vurls;
             $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
-            $scope.type=stdetails.mimetype;
 	    $scope.eventid=stdetails.eventid;
 	   // $scope.opencatsurls=stdetails.opencasturl;
 	    $scope.opencatsurl=$sce.trustAsResourceUrl(stdetails.opencasturl);	
+            $scope.type=stdetails.mimetype;
+	    
         });
 
     }]);
