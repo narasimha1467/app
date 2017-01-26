@@ -1,9 +1,7 @@
 <ion-view>
     <ion-nav-title><mm-format-text watch="true">{{ title }}</mm-format-text></ion-nav-title>
     <ion-content padding="true">
-        <mm-iframe width="384" height="505" src="http://streamdy.eabyas.in:8080/engage/ui/player.html?id=29ffff9e-1c22-4bfa-b38e-cadd32d410d0"></mm-iframe>
-        <mm-iframe width="384" height="505" src="{{ opencatsurl }}"></mm-iframe>
-        
-        {{ opencatsurl }}
+        <video src="{{ vurl }}" onclick="this.play();" controls/>
+
     </ion-content>
 </ion-view>
