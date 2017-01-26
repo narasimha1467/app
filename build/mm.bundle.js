@@ -5712,6 +5712,7 @@ angular.module('mm.core.login')
         });
     };
 	 $scope.connect1 = function(uname) {
+		var domain1 = ["bt", "ht", "mt","rt", "dt", "jc", "nr","bpt", "mpt", "bot", "med", "bams"];
 		var usernamesplit=uname;
 		var split=usernamesplit.substring(0,usernamesplit.indexOf("@"));
 		var newsplit=split.substring(split.length - 4, split.length);
