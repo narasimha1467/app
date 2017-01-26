@@ -5742,17 +5742,17 @@ angular.module('mm.core.login')
 			var url='http://mydy.dypatil.edu/nursing';
 		}
         }else if(domain1.indexOf(finalsplit1) > -1){
-        	 if(finalsplit=="bpt"){
+        	 if(finalsplit1=="bpt"){
 			var url='http://mydy.dypatil.edu/pt';
-		}else if(finalsplit=="mpt"){
+		}else if(finalsplit1=="mpt"){
 			var url='http://mydy.dypatil.edu/pt';
-		}else if(finalsplit=="bot"){
+		}else if(finalsplit1=="bot"){
 			var url='http://mydy.dypatil.edu/ot';
-		}else if(finalsplit=="med"){
+		}else if(finalsplit1=="med"){
 			var url='http://mydy.dypatil.edu/medicine';
 		}
         }else if(domain1.indexOf(finalsplit2) > -1){
-        	if(finalsplit=="bams"){
+        	if(finalsplit2=="bams"){
 			var url='http://mydy.dypatil.edu/ayurveda';
 		}
         }
