@@ -5718,17 +5718,33 @@ angular.module('mm.core.login')
 		var finalsplit=newsplit.substring(0, 2);
 
 		if(finalsplit=="bt"){
-			var url='http://btbi.moodlemenu.com';
+			var url='http://mydy.dypatil.edu/biotech-and-bioinformatics';
 		}
 		else if(finalsplit=="ht"){
 			var url='http://mydy.dypatil.edu/hospitality';
 		}
 		else if(finalsplit=="mt"){
-			var url='http://mgmt.moodlemenu.com';
+			var url='http://mydy.dypatil.edu/management';
+		}else if(finalsplit=="rt"){
+			var url='http://mydy.dypatil.edu/rait';
+		}else if(finalsplit=="dt"){
+			var url='http://mydy.dypatil.edu/dentistry';
+		}else if(finalsplit=="jc"){
+			var url='http://mydy.dypatil.edu/dpvn';
+		}else if(finalsplit=="bpt"){
+			var url='http://mydy.dypatil.edu/pt';
+		}else if(finalsplit=="mpt"){
+			var url='http://mydy.dypatil.edu/pt';
+		}else if(finalsplit=="bot"){
+			var url='http://mydy.dypatil.edu/ot';
+		}else if(finalsplit=="bams"){
+			var url='http://mydy.dypatil.edu/ayurveda';
+		}else if(finalsplit=="med"){
+			var url='http://mydy.dypatil.edu/medicine';
+		}else if(finalsplit=="nr"){
+			var url='http://mydy.dypatil.edu/nursing';
 		}
-		else{
-			var url='http://mydy.dypatil.edu/test';
-		}
+		
 	 $scope.connect(url,usernamesplit);
 	 }
     $scope.connect = function(url,uname) {
