@@ -30,8 +30,8 @@ $ionicPlatform.registerBackButtonAction(function (event) {
       navigator.app.backHistory();
     }
   }, 100);
-$ionicPlatform.onHardwareBackButton(function (event) {
-   	navigator.app.backHistory();
+$ionicPlatform.onHardwareBackButton(function() {
+    alert('hi');
   });
 }]);
 
