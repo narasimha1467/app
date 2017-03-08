@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.userprofile','mm.core.anouncement','mm.core.anouncementall','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_opencast','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
+angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','mm.core.home','mm.core.attendence','mm.core.timetable','mm.core.tomtimetable','mm.core.weektimetable','mm.core.userprofile','mm.core.anouncement','mm.core.anouncementall','mm.core.login', 'mm.core.sidemenu', 'mm.core.user', 'mm.core.settings', 'mm.addons.calendar', 'mm.addons.coursecompletion', 'mm.addons.grades', 'mm.addons.messages', 'mm.addons.mod_chat', 'mm.addons.mod_choice', 'mm.addons.mod_book', 'mm.addons.mod_assign', 'mm.addons.mod_folder', 'mm.addons.mod_forum', 'mm.addons.mod_imscp', 'mm.addons.mod_label', 'mm.addons.mod_resource','mm.addons.mod_opencast','mm.addons.mod_flexpaper', 'mm.addons.mod_url', 'mm.addons.participants', 'mm.addons.pushnotifications', 'mm.addons.remotestyles', 'mm.addons.notes', 'mm.addons.mod_page', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria'])
 .run(["$ionicPlatform", function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -4292,6 +4292,32 @@ angular.module('mm.core.timetable', [])
         }
     });
 }])
+angular.module('mm.core.tomtimetable', [])
+.config(["$stateProvider", function($stateProvider) {
+    $stateProvider
+    .state('site.mm_tomtimetable', {
+        url: '/mm_tomtimetable',
+        views: {
+            'site': {
+                templateUrl: 'core/components/tomtimetable/templates/list.html',
+				controller: 'mmTomtimetableListCtrl'
+            }
+        }
+    });
+}])
+angular.module('mm.core.weektimetable', [])
+.config(["$stateProvider", function($stateProvider) {
+    $stateProvider
+    .state('site.mm_weektimetable', {
+        url: '/mm_weektimetable',
+        views: {
+            'site': {
+                templateUrl: 'core/components/weektimetable/templates/list.html',
+                controller: 'mmWeektimetableListCtrl'
+            }
+        }
+    });
+}])
 angular.module('mm.core.userprofile', [])
     .config(["$stateProvider", function($stateProvider) {
         $stateProvider
@@ -5429,6 +5455,104 @@ angular.module('mm.core.timetable')
 		 };
     return self;
 }]);
+angular.module('mm.core.tomtimetable')
+.controller('mmTomtimetableListCtrl', ["$scope", "$mmTomtimetable","$mmUtil", function($scope, $mmTomtimetable,$mmUtil) {
+    function fetchTomtimetable(refresh) {
+		 return $mmTomtimetable.getUserTomtimetable(refresh).then(function(tomtimetable) {
+            $scope.tomtimetable = tomtimetable;
+          }, function(error) {
+            if (typeof error != 'undefined' && error !== '') {
+                $mmUtil.showErrorModal(error);
+            } else {
+                $mmUtil.showErrorModal('mm.courses.errorloadcourses', true);
+            }
+        });
+    }
+	fetchTomtimetable().finally(function() {
+        $scope.tomtimetableLoaded = true;
+    });
+	 $scope.refreshTomtimetable = function() {
+        fetchTomtimetable(true).finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+}]);
+
+angular.module('mm.core.tomtimetable')
+.factory('$mmTomtimetable', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+    var self = {},
+	currentTomtimetable = {};
+         self.getUserTomtimetable = function(refresh, siteid) {
+        siteid = siteid || $mmSite.getId();
+        var userid = $mmSite.getUserId(),
+            presets = {},
+
+            data = {userid: userid};
+        if (typeof userid === 'undefined') {
+            return $q.reject();
+        }
+        if (refresh) {
+            presets.getFromCache = false;
+        }
+        return $mmSitesManager.getSite(siteid).then(function(site) {
+            return site.read('local_user_tomorrowstimetable_custom', data, presets).then(function(tomtimetable) {
+                //storeCoursesInMemory(attendence);
+                return tomtimetable;
+            });
+        });
+		 };
+    return self;
+}]);
+angular.module('mm.core.weektimetable')
+.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$mmUtil", function($scope, $mmWeektimetable,$mmUtil) {
+    function fetchWeektimetable(refresh) {
+		 return $mmWeektimetable.getUserWeektimetable(refresh).then(function(weektimetable) {
+            $scope.weektimetable = weektimetable;
+          }, function(error) {
+            if (typeof error != 'undefined' && error !== '') {
+                $mmUtil.showErrorModal(error);
+            } else {
+                $mmUtil.showErrorModal('mm.courses.errorloadcourses', true);
+            }
+        });
+    }
+	fetchWeektimetable().finally(function() {
+        $scope.weektimetableLoaded = true;
+    });
+	 $scope.refreshWeektimetable = function() {
+        fetchWeektimetable(true).finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+}]);
+
+angular.module('mm.core.weektimetable')
+.factory('$mmWeektimetable', ["$q", "$mmSite", "$mmSitesManager", function($q, $mmSite, $mmSitesManager) {
+    var self = {},
+	currentWeektimetable = {};
+         self.getUserWeektimetable = function(refresh, siteid) {
+        siteid = siteid || $mmSite.getId();
+        var userid = $mmSite.getUserId(),
+            presets = {},
+
+            data = {userid: userid};
+        if (typeof userid === 'undefined') {
+            return $q.reject();
+        }
+        if (refresh) {
+            presets.getFromCache = false;
+        }
+        return $mmSitesManager.getSite(siteid).then(function(site) {
+            return site.read('local_user_weeklytimetable_custom', data, presets).then(function(weektimetable) {
+                //storeCoursesInMemory(attendence);
+                return weektimetable;
+            });
+        });
+		 };
+    return self;
+}]);
 angular.module('mm.core.userprofile')
     .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$mmUtil", function($scope, $mmUserprofile,$mmUtil) {
         function fetchUserprofile(refresh) {
@@ -5734,7 +5858,7 @@ angular.module('mm.core.login')
 		}else if(finalsplit=="rt"){
 			var url='http://mydy.dypatil.edu/rait';
 		}else if(finalsplit=="dt"){
-			var url='http://mydy.dypatil.edu/dentistry';
+			var url='http://mydy.dypatil.edu/test';
 		}else if(finalsplit=="jc"){
 			var url='http://mydy.dypatil.edu/dpvn';
 		}
