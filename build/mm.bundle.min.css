@@ -162,6 +162,15 @@ i.icon.ion-android-contact {width: 58px;float: left;font-size: 52px;border-radiu
     padding: 10px;
 
 }
+a.today_heading.timetable_buttons {
+    width: 49%;
+    float: left;
+    margin: 10px 6px;
+    text-decoration: none;
+}
+.timetable_div_button {
+    margin: 18px 0;
+}
 .scroll-content {
     background-image: url(../img/bg.png);
     background-size: 100% 100%;
