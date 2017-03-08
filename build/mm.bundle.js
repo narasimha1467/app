@@ -23,11 +23,9 @@ angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','m
     }
   });
 $ionicPlatform.registerBackButtonAction(function (event) {
+	event.preventdefault();
   	alert('hi');
-  }, 100);
-$ionicPlatform.onHardwareBackButton(function() {
-    alert('hi');
-  });
+  }, 999);
 }]);
 
 angular.module('mm.core', ['pascalprecht.translate'])
