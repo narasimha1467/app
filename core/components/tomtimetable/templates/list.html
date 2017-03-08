@@ -5,13 +5,13 @@
 		</ion-refresher>
 		<h6 class="today_heading">Tomorrow Timetable</h6>
 		<table width="100%" class="timetable_table">
-			<tr width="100%" class="timetable_tr" ng-repeat="tomtimetable in timetable">
+			<tr width="100%" class="timetable_tr" ng-repeat="tomtimetable in tomtimetable">
 				<td class="timetable_td">
-					<div class="time_timetable"><div class="side_heading">Timings</div><div>{{timetable.classtime_start}}</div><div>to</div><div>{{timetable.classtime_end}}</div></div>
+					<div class="time_timetable"><div class="side_heading">Timings</div><div>{{tomtimetable.classtime_start}}</div><div>to</div><div>{{tomtimetable.classtime_end}}</div></div>
 					<div class="course_timetable"><div class="timetable_details"><div class="timetable_instructor"><span class="side_heading">Class Name</span></div><div class="timetable_instructor"><span class="side_heading">Class Type</span></div></div>
-						<div class="timetable_details"><div class="timetable_instructor timetable_course">{{timetable.classcode}}</div><div class="timetable_instructor">{{timetable.classtype}}</div></div>
+						<div class="timetable_details"><div class="timetable_instructor timetable_course">{{tomtimetable.classcode}}</div><div class="timetable_instructor">{{tomtimetable.classtype}}</div></div>
 						<div class="timetable_details"><div class="timetable_instructor"><span class="side_heading">Instructorname</span></div><div class="timetable_instructor"><span class="side_heading">Class Room</span></div></div>
-						<div class="timetable_details"><div class="timetable_instructor">{{timetable.instructorname}}</div><div class="timetable_instructor">{{timetable.classroom}}</div></div></div>
+						<div class="timetable_details"><div class="timetable_instructor">{{tomtimetable.instructorname}}</div><div class="timetable_instructor">{{tomtimetable.classroom}}</div></div></div>
 				</td>
 			</tr>
 		</table>
