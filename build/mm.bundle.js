@@ -22,10 +22,15 @@ angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','m
       StatusBar.styleDefault();
     }
   });
-$ionicPlatform.registerBackButtonAction(function (event) {
-	event.preventdefault();
-  	alert('hi');
-  }, 999);
+// $ionicPlatform.registerBackButtonAction(function (event) {
+// 	event.preventdefault();
+//   	alert('hi');
+//   }, 999);
+	$ionicPlatform.onHardwareBackButton(function() {
+     event.preventDefault();
+     event.stopPropagation();
+     alert('going back now yall');
+  });
 }]);
 
 angular.module('mm.core', ['pascalprecht.translate'])
