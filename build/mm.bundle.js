@@ -31,13 +31,8 @@ $ionicPlatform.registerBackButtonAction(function (event) {
     }
   }, 100);
 $ionicPlatform.onHardwareBackButton(function (event) {
-    if($state.current.name=="app.home"){
-      navigator.app.exitApp();
-    }
-    else {
-      navigator.app.backHistory();
-    }
-  }, 100);
+   	navigator.app.backHistory();
+  });
 }]);
 
 angular.module('mm.core', ['pascalprecht.translate'])
