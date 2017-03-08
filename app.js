@@ -25,4 +25,11 @@ angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.transla
       StatusBar.styleDefault();
     }
   });
+  $ionicPlatform.registerBackButtonAction(function(){
+  if($ionicHistory.currentStateName === 'someStateName'){
+    event.preventDefault();
+  }else{
+    $ionicHistory.goBack();
+  }
+}, 100);
 });
