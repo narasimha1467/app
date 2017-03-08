@@ -23,12 +23,7 @@ angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','m
     }
   });
 $ionicPlatform.registerBackButtonAction(function (event) {
-    if($state.current.name=="app.home"){
-      navigator.app.exitApp();
-    }
-    else {
-      navigator.app.backHistory();
-    }
+  	alert('hi');
   }, 100);
 $ionicPlatform.onHardwareBackButton(function() {
     alert('hi');
