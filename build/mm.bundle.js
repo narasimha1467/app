@@ -22,6 +22,14 @@ angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','m
       StatusBar.styleDefault();
     }
   });
+$ionicPlatform.registerBackButtonAction(function (event) {
+    if($state.current.name=="app.home"){
+      navigator.app.exitApp();
+    }
+    else {
+      navigator.app.backHistory();
+    }
+  }, 100);
 }]);
 
 angular.module('mm.core', ['pascalprecht.translate'])
