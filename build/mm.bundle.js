@@ -26,7 +26,31 @@ angular.module('mm', ['ionic', 'mm.core', 'mm.core.course', 'mm.core.courses','m
 // 	event.preventdefault();
 //   	alert('hi');
 //   }, 999);
-	
+ $ionicPlatform.registerBackButtonAction(function (e) {
+    e.preventDefault();
+    function showConfirm() {
+        var confirmPopup = $ionicPopup.show({
+            title: 'Exit App?',
+            template: 'Are you sure you want to exit?',
+            buttons: [{
+                    text: 'Cancel',
+                    type : '',
+                }, {
+                    text: 'Ok',
+                    type : 'button-calm',
+                    onTap: function () {
+                        ionic.Platform.exitApp();
+                    }
+                }]
+        });
+    };
+    if ($ionicHistory.backView()) {
+        $ionicHistory.backView().go();
+    } else {
+        showConfirm();
+    }
+    return false;
+}, 999);
 }]);
 
 angular.module('mm.core', ['pascalprecht.translate'])
