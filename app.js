@@ -25,11 +25,29 @@ angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.transla
       StatusBar.styleDefault();
     }
   });
-  $ionicPlatform.registerBackButtonAction(function(){
-  if($ionicHistory.currentStateName === 'someStateName'){
-    event.preventDefault();
-  }else{
-    $ionicHistory.goBack();
-  }
-}, 100);
+  $ionicPlatform.registerBackButtonAction(function (e) {
+    e.preventDefault();
+    function showConfirm() {
+        var confirmPopup = $ionicPopup.show({
+            title: 'Exit App?',
+            template: 'Are you sure you want to exit?',
+            buttons: [{
+                    text: 'Cancel',
+                    type : '',
+                }, {
+                    text: 'Ok',
+                    type : 'button-calm',
+                    onTap: function () {
+                        ionic.Platform.exitApp();
+                    }
+                }]
+        });
+    };
+    if ($ionicHistory.backView()) {
+        $ionicHistory.backView().go();
+    } else {
+        showConfirm();
+    }
+    return false;
+}, 101);
 });
