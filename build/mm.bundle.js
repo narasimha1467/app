@@ -5485,7 +5485,7 @@ angular.module('mm.core.timetable')
     return self;
 }]);
 angular.module('mm.core.tomtimetable')
-.controller('mmTomtimetableListCtrl', ["$scope", "$mmTomtimetable","$mmUtil", function($scope, $mmTomtimetable,$mmUtil) {
+.controller('mmTomtimetableListCtrl', ["$scope", "$mmTomtimetable","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmTomtimetable,ionicPlatform,$mmUtil, $ionicHistory) {
     function fetchTomtimetable(refresh) {
 		 return $mmTomtimetable.getUserTomtimetable(refresh).then(function(tomtimetable) {
             $scope.tomtimetable = tomtimetable;
@@ -5505,6 +5505,9 @@ angular.module('mm.core.tomtimetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
+    $ionicPlatform.registerBackButtonAction(function() {
+      $ionicHistory.goBack();
+  }, 999);
 
 }]);
 
