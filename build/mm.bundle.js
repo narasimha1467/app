@@ -5364,7 +5364,7 @@ angular.module('mm.core.home')
     return self;
 }]);
 angular.module('mm.core.attendence')
-.controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmAttendence, $ionicPlatform, $mmUtil, $ionicHistory) {
+.controller('mmAttendenceListCtrl', ["$scope", "$state","$mmAttendence","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $state, $mmAttendence, $ionicPlatform, $mmUtil, $ionicHistory) {
     function fetchAttendence(refresh) {
         return $mmAttendence.getUserAttendence(refresh).then(function(attendence) {
             $scope.attendence = attendence;
@@ -5518,7 +5518,7 @@ angular.module('mm.core.tomtimetable')
     return self;
 }]);
 angular.module('mm.core.weektimetable')
-.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmWeektimetable, $ionicPlatform,$mmUtil, $ionicHistory) {
+.controller('mmWeektimetableListCtrl', ["$scope", "$state","$mmWeektimetable","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $state, $mmWeektimetable, $ionicPlatform,$mmUtil, $ionicHistory) {
     function fetchWeektimetable(refresh) {
 		 return $mmWeektimetable.getUserWeektimetable(refresh).then(function(weektimetable) {
             $scope.weektimetable = weektimetable;
@@ -5570,7 +5570,7 @@ angular.module('mm.core.weektimetable')
     return self;
 }]);
 angular.module('mm.core.userprofile')
-    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmUserprofile,$ionicPlatform,$mmUtil, $ionicHistory) {
+    .controller('mmUserprofileListCtrl', ["$scope", "$state", "$mmUserprofile","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $state, $mmUserprofile,$ionicPlatform,$mmUtil, $ionicHistory) {
         function fetchUserprofile(refresh) {
             return $mmUserprofile.getUserUserprofile(refresh).then(function(userprofile) {
                 $scope.userprofile = userprofile;
@@ -5622,7 +5622,7 @@ angular.module('mm.core.userprofile')
         return self;
     }]);
 angular.module('mm.core.anouncement')
-.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncement,$ionicPlatform,$mmUtil,$sce, $ionicHistory) {
+.controller('mmAnouncementListCtrl', ["$scope", "$state", "$mmSite","$mmAnouncement","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$state,$mmSite, $mmAnouncement,$ionicPlatform,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncement(refresh) {
 		 return $mmAnouncement.getUserAnouncement(refresh).then(function(anouncement) {
             $scope.anouncement = anouncement;
@@ -5683,7 +5683,7 @@ angular.module('mm.core.anouncement')
     return self;
 }]);
 angular.module('mm.core.anouncementall')
-.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncementall,$ionicPlatform ,$mmUtil,$sce, $ionicHistory) {
+.controller('mmAnouncementallListCtrl', ["$scope", "$state", "$mmSite","$mmAnouncementall","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$state,$mmSite, $mmAnouncementall,$ionicPlatform ,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncementall(refresh) {
 		 return $mmAnouncementall.getUserAnouncementall(refresh).then(function(anouncementall) {
             $scope.anouncementall = anouncementall;
@@ -7500,7 +7500,7 @@ angular.module('mm.addons.coursecompletion')
 }]);
 
 angular.module('mm.addons.calendar')
-.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$ionicPlatform", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $ionicPlatform, $mmUtil, $mmCourse, $mmCourses,
+.controller('mmaCalendarEventCtrl', ["$scope", "$state","$log", "$stateParams", "$mmaCalendar", "$ionicPlatform", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", "$ionicHistory", function($scope, $state, $log, $stateParams, $mmaCalendar, $ionicPlatform, $mmUtil, $mmCourse, $mmCourses,
         $mmLocalNotifications, $ionicHistory) {
     $log = $log.getInstance('mmaCalendarEventCtrl');
     var eventid = parseInt($stateParams.id);
