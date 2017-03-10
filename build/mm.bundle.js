@@ -5336,7 +5336,7 @@ angular.module('mm.core.home')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-
+    
 }]);
 
 angular.module('mm.core.home')
@@ -5384,6 +5384,9 @@ angular.module('mm.core.attendence')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
+    $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 
 }]);
 
@@ -5432,9 +5435,7 @@ angular.module('mm.core.timetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-	$ionicHistory.nextViewOptions({
-  		disableBack: false
-	});
+
 }]);
 
 angular.module('mm.core.timetable')
@@ -5535,6 +5536,9 @@ angular.module('mm.core.weektimetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
+    $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 
 }]);
 
@@ -5584,6 +5588,9 @@ angular.module('mm.core.userprofile')
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
+        $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 
     }]);
 
@@ -5642,6 +5649,9 @@ angular.module('mm.core.anouncement')
         window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
            
         }
+        $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 }]);
 
 angular.module('mm.core.anouncement')
@@ -5699,6 +5709,9 @@ angular.module('mm.core.anouncementall')
         window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
            
         }
+  $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 }]);
 
 angular.module('mm.core.anouncementall')
@@ -7533,6 +7546,9 @@ angular.module('mm.addons.calendar')
             $mmaCalendar.updateNotificationTime($scope.event, time);
         };
     }
+    $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 }]);
 
 angular.module('mm.addons.calendar')
@@ -7601,6 +7617,9 @@ angular.module('mm.addons.calendar')
             });
         });
     };
+    $ionicPlatform.registerBackButtonAction(function() {
+      $state.go('site.mm_timetable');;
+  }, 999);
 }]);
 
 angular.module('mm.addons.calendar')
