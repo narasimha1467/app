@@ -5883,7 +5883,7 @@ angular.module('mm.core.login')
 		}else if(finalsplit=="rt"){
 			var url='http://mydy.dypatil.edu/rait';
 		}else if(finalsplit=="dt"){
-			var url='http://mydy.dypatil.edu/test';
+			var url='http://mydy.dypatil.edu/dentistry';
 		}else if(finalsplit=="jc"){
 			var url='http://mydy.dypatil.edu/dpvn';
 		}
