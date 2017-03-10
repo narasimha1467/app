@@ -7500,8 +7500,8 @@ angular.module('mm.addons.coursecompletion')
 }]);
 
 angular.module('mm.addons.calendar')
-.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications","$ionicPlatform", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $mmUtil, $mmCourse, $mmCourses,
-        $mmLocalNotifications,$ionicPlatform, $ionicHistory) {
+.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$ionicPlatform", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $ionicPlatform, $mmUtil, $mmCourse, $mmCourses,
+        $mmLocalNotifications, $ionicHistory) {
     $log = $log.getInstance('mmaCalendarEventCtrl');
     var eventid = parseInt($stateParams.id);
     function fetchEvent(refresh) {
@@ -7554,7 +7554,7 @@ angular.module('mm.addons.calendar')
 }]);
 
 angular.module('mm.addons.calendar')
-.controller('mmaCalendarListCtrl', ["$scope", "$stateParams", "$log", "$state", "$mmaCalendar", "$mmUtil", "$ionicHistory", "mmaCalendarDaysInterval", function($scope, $stateParams, $log, $state, $mmaCalendar, $mmUtil, $ionicHistory,
+.controller('mmaCalendarListCtrl', ["$scope", "$stateParams", "$log", "$state", "$mmaCalendar", "$ionicPlatform", "$mmUtil", "$ionicHistory", "mmaCalendarDaysInterval", function($scope, $stateParams, $log, $state, $mmaCalendar, $ionicPlatform, $mmUtil, $ionicHistory,
         mmaCalendarDaysInterval) {
     $log = $log.getInstance('mmaCalendarListCtrl');
     var daysLoaded,
