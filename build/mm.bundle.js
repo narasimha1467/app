@@ -5364,7 +5364,7 @@ angular.module('mm.core.home')
     return self;
 }]);
 angular.module('mm.core.attendence')
-.controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$mmUtil", function($scope, $mmAttendence,$mmUtil) {
+.controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$mmUtil", "$ionicHistory", function($scope, $mmAttendence,$mmUtil, $ionicHistory) {
     function fetchAttendence(refresh) {
         return $mmAttendence.getUserAttendence(refresh).then(function(attendence) {
             $scope.attendence = attendence;
@@ -5435,7 +5435,9 @@ angular.module('mm.core.timetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-
+	$ionicHistory.nextViewOptions({
+  		disableBack: false
+	});
 }]);
 
 angular.module('mm.core.timetable')
@@ -5516,7 +5518,7 @@ angular.module('mm.core.tomtimetable')
     return self;
 }]);
 angular.module('mm.core.weektimetable')
-.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$mmUtil", function($scope, $mmWeektimetable,$mmUtil) {
+.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$mmUtil", "$ionicHistory", function($scope, $mmWeektimetable,$mmUtil, $ionicHistory) {
     function fetchWeektimetable(refresh) {
 		 return $mmWeektimetable.getUserWeektimetable(refresh).then(function(weektimetable) {
             $scope.weektimetable = weektimetable;
@@ -5568,7 +5570,7 @@ angular.module('mm.core.weektimetable')
     return self;
 }]);
 angular.module('mm.core.userprofile')
-    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$mmUtil", function($scope, $mmUserprofile,$mmUtil) {
+    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$mmUtil", "$ionicHistory", function($scope, $mmUserprofile,$mmUtil, $ionicHistory) {
         function fetchUserprofile(refresh) {
             return $mmUserprofile.getUserUserprofile(refresh).then(function(userprofile) {
                 $scope.userprofile = userprofile;
@@ -5620,7 +5622,7 @@ angular.module('mm.core.userprofile')
         return self;
     }]);
 angular.module('mm.core.anouncement')
-.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$mmUtil","$sce", function($scope,$mmSite, $mmAnouncement,$mmUtil,$sce) {
+.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncement,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncement(refresh) {
 		 return $mmAnouncement.getUserAnouncement(refresh).then(function(anouncement) {
             $scope.anouncement = anouncement;
@@ -5681,7 +5683,7 @@ angular.module('mm.core.anouncement')
     return self;
 }]);
 angular.module('mm.core.anouncementall')
-.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$mmUtil","$sce", function($scope,$mmSite, $mmAnouncementall,$mmUtil,$sce) {
+.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncementall,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncementall(refresh) {
 		 return $mmAnouncementall.getUserAnouncementall(refresh).then(function(anouncementall) {
             $scope.anouncementall = anouncementall;
@@ -7498,8 +7500,8 @@ angular.module('mm.addons.coursecompletion')
 }]);
 
 angular.module('mm.addons.calendar')
-.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", function($scope, $log, $stateParams, $mmaCalendar, $mmUtil, $mmCourse, $mmCourses,
-        $mmLocalNotifications) {
+.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $mmUtil, $mmCourse, $mmCourses,
+        $mmLocalNotifications, $ionicHistory) {
     $log = $log.getInstance('mmaCalendarEventCtrl');
     var eventid = parseInt($stateParams.id);
     function fetchEvent(refresh) {
