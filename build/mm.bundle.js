@@ -5364,7 +5364,7 @@ angular.module('mm.core.home')
     return self;
 }]);
 angular.module('mm.core.attendence')
-.controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$mmUtil", "$ionicHistory", function($scope, $mmAttendence,$mmUtil, $ionicHistory) {
+.controller('mmAttendenceListCtrl', ["$scope", "$mmAttendence","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmAttendence, $ionicPlatform, $mmUtil, $ionicHistory) {
     function fetchAttendence(refresh) {
         return $mmAttendence.getUserAttendence(refresh).then(function(attendence) {
             $scope.attendence = attendence;
@@ -5415,7 +5415,7 @@ angular.module('mm.core.attendence')
     return self;
 }]);
 angular.module('mm.core.timetable')
-.controller('mmTimetableListCtrl', ["$scope", "$mmTimetable","$mmUtil","$ionicHistory", function($scope, $mmTimetable,$mmUtil,$ionicHistory) {
+.controller('mmTimetableListCtrl', ["$scope", "$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory", function($scope, $mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory) {
     function fetchTimetable(refresh) {
 		 return $mmTimetable.getUserTimetable(refresh).then(function(timetable) {
             $scope.timetable = timetable;
@@ -5518,7 +5518,7 @@ angular.module('mm.core.tomtimetable')
     return self;
 }]);
 angular.module('mm.core.weektimetable')
-.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$mmUtil", "$ionicHistory", function($scope, $mmWeektimetable,$mmUtil, $ionicHistory) {
+.controller('mmWeektimetableListCtrl', ["$scope", "$mmWeektimetable","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmWeektimetable, $ionicPlatform,$mmUtil, $ionicHistory) {
     function fetchWeektimetable(refresh) {
 		 return $mmWeektimetable.getUserWeektimetable(refresh).then(function(weektimetable) {
             $scope.weektimetable = weektimetable;
@@ -5570,7 +5570,7 @@ angular.module('mm.core.weektimetable')
     return self;
 }]);
 angular.module('mm.core.userprofile')
-    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$mmUtil", "$ionicHistory", function($scope, $mmUserprofile,$mmUtil, $ionicHistory) {
+    .controller('mmUserprofileListCtrl', ["$scope", "$mmUserprofile","$ionicPlatform","$mmUtil", "$ionicHistory", function($scope, $mmUserprofile,$ionicPlatform,$mmUtil, $ionicHistory) {
         function fetchUserprofile(refresh) {
             return $mmUserprofile.getUserUserprofile(refresh).then(function(userprofile) {
                 $scope.userprofile = userprofile;
@@ -5622,7 +5622,7 @@ angular.module('mm.core.userprofile')
         return self;
     }]);
 angular.module('mm.core.anouncement')
-.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncement,$mmUtil,$sce, $ionicHistory) {
+.controller('mmAnouncementListCtrl', ["$scope", "$mmSite","$mmAnouncement","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncement,$ionicPlatform,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncement(refresh) {
 		 return $mmAnouncement.getUserAnouncement(refresh).then(function(anouncement) {
             $scope.anouncement = anouncement;
@@ -5683,7 +5683,7 @@ angular.module('mm.core.anouncement')
     return self;
 }]);
 angular.module('mm.core.anouncementall')
-.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncementall,$mmUtil,$sce, $ionicHistory) {
+.controller('mmAnouncementallListCtrl', ["$scope", "$mmSite","$mmAnouncementall","$ionicPlatform","$mmUtil","$sce", "$ionicHistory", function($scope,$mmSite, $mmAnouncementall,$ionicPlatform ,$mmUtil,$sce, $ionicHistory) {
     function fetchAnouncementall(refresh) {
 		 return $mmAnouncementall.getUserAnouncementall(refresh).then(function(anouncementall) {
             $scope.anouncementall = anouncementall;
@@ -7500,8 +7500,8 @@ angular.module('mm.addons.coursecompletion')
 }]);
 
 angular.module('mm.addons.calendar')
-.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $mmUtil, $mmCourse, $mmCourses,
-        $mmLocalNotifications, $ionicHistory) {
+.controller('mmaCalendarEventCtrl', ["$scope", "$log", "$stateParams", "$mmaCalendar", "$mmUtil", "$mmCourse", "$mmCourses", "$mmLocalNotifications","$ionicPlatform", "$ionicHistory", function($scope, $log, $stateParams, $mmaCalendar, $mmUtil, $mmCourse, $mmCourses,
+        $mmLocalNotifications,$ionicPlatform, $ionicHistory) {
     $log = $log.getInstance('mmaCalendarEventCtrl');
     var eventid = parseInt($stateParams.id);
     function fetchEvent(refresh) {
