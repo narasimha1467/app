@@ -5438,9 +5438,9 @@ angular.module('mm.core.timetable')
 	 $ionicPlatform.registerBackButtonAction(function() {
      		navigator.app.exitApp();
  	 }, 999);
-	$ionicHistory.nextViewOptions({
-  		disableBack: false
-	});
+// 	$ionicHistory.nextViewOptions({
+//   		disableBack: false
+// 	});
 }]);
 
 angular.module('mm.core.timetable')
