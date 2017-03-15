@@ -5415,7 +5415,7 @@ angular.module('mm.core.attendence')
     return self;
 }]);
 angular.module('mm.core.timetable')
-.controller('mmTimetableListCtrl', ["$scope", "$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory","ionic", function($scope, $mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory,ionic) {
+.controller('mmTimetableListCtrl', ["$scope", "$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory", function($scope, $mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory) {
     function fetchTimetable(refresh) {
 		 return $mmTimetable.getUserTimetable(refresh).then(function(timetable) {
             $scope.timetable = timetable;
@@ -5436,7 +5436,7 @@ angular.module('mm.core.timetable')
         });
     };
 	 $ionicPlatform.registerBackButtonAction(function() {
-     		ionic.Platform.exitApp();
+     		navigator.app.exitApp();
  	 }, 999);
  	$ionicHistory.nextViewOptions({
   		disableBack: true
