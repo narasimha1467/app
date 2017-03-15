@@ -5436,7 +5436,7 @@ angular.module('mm.core.timetable')
         });
     };
 	 $ionicPlatform.registerBackButtonAction(function() {
-     		navigator.app.exitApp();
+     		ionic.Platform.exitApp();
  	 }, 999);
 // 	$ionicHistory.nextViewOptions({
 //   		disableBack: false
