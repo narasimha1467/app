@@ -5437,6 +5437,7 @@ angular.module('mm.core.timetable')
         });
     };
 	 $ionicPlatform.registerBackButtonAction(function() {
+        alert('hi');
      		navigator.app.exitApp();
  	 }, 999);
  	$ionicHistory.nextViewOptions({
