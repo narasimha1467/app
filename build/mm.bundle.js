@@ -4285,7 +4285,7 @@ angular.module('mm.core.attendence', [])
     });
 }])
 angular.module('mm.core.timetable', ['ionic'])
-.config(["$stateProvider","$ionicPlatform","$ionicHistory", function($stateProvider,$ionicPlatform,$ionicHistory) {
+.config(["$stateProvider", function($stateProvider) {
     $stateProvider
     .state('site.mm_timetable', {
         url: '/mm_timetable',
@@ -4296,9 +4296,7 @@ angular.module('mm.core.timetable', ['ionic'])
             }
         }
     });
-    $ionicPlatform.registerBackButtonAction(function() {
-     		 ionic.Platform.exitApp();
- 	 }, 1000);
+    
 }])
 angular.module('mm.core.tomtimetable', [])
 .config(["$stateProvider", function($stateProvider) {
