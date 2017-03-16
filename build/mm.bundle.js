@@ -5439,7 +5439,7 @@ angular.module('mm.core.timetable')
 	 $ionicPlatform.registerBackButtonAction(function() {
         alert('hi');
      		navigator.app.exitApp();
- 	 }, 999);
+ 	 }, 100);
  	$ionicHistory.nextViewOptions({        
  		 disableBack: true,
  		 historyRoot: true
