@@ -16,7 +16,7 @@
 // and should not be split into multiple lines, see gulpfile.js.
 angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.translate', 'ngAria','$ionicHistory'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$state) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -25,30 +25,10 @@ angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.transla
       StatusBar.styleDefault();
     }
   });
-  $ionicPlatform.registerBackButtonAction(function (e) {
-    e.preventDefault();
-    function showConfirm() {
-        var confirmPopup = $ionicPopup.show({
-            title: 'Exit App?',
-            template: 'Are you sure you want to exit?',
-            buttons: [{
-                    text: 'Cancel',
-                    type : '',
-                }, {
-                    text: 'Ok',
-                    type : 'button-calm',
-                    onTap: function () {
-                        ionic.Platform.exitApp();
-                    }
-                }]
-        });
-    };
-    if ($ionicHistory.backView()) {
-      alert('hiii');
-        $ionicHistory.backView().go();
-    } else {
-        showConfirm();
-    }
-    return false;
-}, 999);
+
+  $ionicPlatform.registerBackButtonAction(function() {
+        if ($state.current.name == "site.mm_timetable") {
+            navigator.app.exitApp();
+        }
+    }, 100);
 });
