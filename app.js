@@ -27,6 +27,7 @@ angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.transla
   });
 
   $ionicPlatform.registerBackButtonAction(function() {
+    alert('hiii');
         if ($state.current.name == "site.mm_timetable") {
             navigator.app.exitApp();
         }
