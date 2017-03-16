@@ -5440,9 +5440,10 @@ angular.module('mm.core.timetable')
         alert('hi');
      		navigator.app.exitApp();
  	 }, 999);
- 	$ionicHistory.nextViewOptions({
-  		disableBack: true
-	});
+ 	$ionicHistory.nextViewOptions({        
+ 		 disableBack: true,
+ 		 historyRoot: true
+	}); 
 }]);
 
 angular.module('mm.core.timetable')
