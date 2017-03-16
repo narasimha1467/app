@@ -44,6 +44,7 @@ angular.module('mm', ['ionic', 'ngCordova', 'angular-md5', 'pascalprecht.transla
         });
     };
     if ($ionicHistory.backView()) {
+      alert('hi');
         $ionicHistory.backView().go();
     } else {
         showConfirm();
