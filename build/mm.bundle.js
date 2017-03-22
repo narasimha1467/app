@@ -4013,8 +4013,8 @@ angular.module('mm.core')
         priority: 500,
         compile: function(el, attrs) {
             attrs.$set('type',
-                null,               
-                false               
+                null,
+                false
             );
         }
     }
@@ -4296,7 +4296,7 @@ angular.module('mm.core.timetable', ['ionic'])
             }
         }
     });
-    
+
 }])
 angular.module('mm.core.tomtimetable', [])
 .config(["$stateProvider", function($stateProvider) {
@@ -4370,7 +4370,7 @@ angular.module('mm.core.login', [])
         url: '/mm_login',
         abstract: true,
         templateUrl: 'core/components/login/templates/base.html',
-        cache: false,  
+        cache: false,
         onEnter: ["$ionicHistory", function($ionicHistory) {
             $ionicHistory.clearHistory();
         }]
@@ -5337,7 +5337,7 @@ angular.module('mm.core.home')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-    
+
 }]);
 
 angular.module('mm.core.home')
@@ -5361,7 +5361,7 @@ angular.module('mm.core.home')
                 return home;
             });
         });
-		 };	
+		 };
     return self;
 }]);
 angular.module('mm.core.attendence')
@@ -5412,11 +5412,40 @@ angular.module('mm.core.attendence')
                 return attendence;
             });
         });
-		 };	
+		 };
     return self;
 }]);
 angular.module('mm.core.timetable')
-.controller('mmTimetableListCtrl', ["$scope", "$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory", function($scope, $mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory) {
+.controller('mmTimetableListCtrl', ["$scope","$state","$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory", function($scope,$state,$mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory) {
+  console.log("I am home");
+  var backcnt = 0;
+    document.addEventListener('backbutton', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var currentState = $state.current.name;
+      if(currentState == "site.mm_timetable"){
+        backcnt++;
+      }
+      if(backcnt == 1 && currentState == "site.mm_timetable"){
+      //  alert("Press back button to quit")
+      }
+
+
+
+      console.log("current state  "+currentState);
+      console.log('hey yaaahh'+backcnt);
+
+      if(backcnt == 2 && currentState == "site.mm_timetable"){
+        backcnt = 0;
+        navigator.app.exitApp();
+      }
+
+    //  ionic.Platform.exitApp();
+    }, false);
+
+
+
+
     function fetchTimetable(refresh) {
 		 return $mmTimetable.getUserTimetable(refresh).then(function(timetable) {
             $scope.timetable = timetable;
@@ -5436,14 +5465,14 @@ angular.module('mm.core.timetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
-	 $ionicPlatform.registerBackButtonAction(function() {
-        alert('hi');
-     		navigator.app.exitApp();
- 	 }, 100);
- 	$ionicHistory.nextViewOptions({        
+	 /*$ionicPlatform.registerBackButtonAction(function() {
+      //  alert('hi');
+     		//navigator.app.exitApp();
+ 	 }, 100);*/
+ 	$ionicHistory.nextViewOptions({
  		 disableBack: true,
  		 historyRoot: true
-	}); 
+	});
 }]);
 
 angular.module('mm.core.timetable')
@@ -5652,10 +5681,10 @@ angular.module('mm.core.anouncement')
 		var siteinfo = $mmSite.getInfo();
 	        var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id+'&uname='+siteinfo.username;
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
-       
+
       	var url=$sce.trustAsResourceUrl(src);
-        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
-           
+        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes');
+
         }
         $ionicPlatform.registerBackButtonAction(function() {
       $state.go('site.mm_timetable');;
@@ -5670,7 +5699,7 @@ angular.module('mm.core.anouncement')
         siteid = siteid || $mmSite.getId();
         var userid = $mmSite.getUserId(),
             presets = {},
-			
+
             data = {userid: userid};
         if (typeof userid === 'undefined') {
             return $q.reject();
@@ -5678,14 +5707,14 @@ angular.module('mm.core.anouncement')
         if (refresh) {
             presets.getFromCache = false;
         }
-         
+
         return $mmSitesManager.getSite(siteid).then(function(site) {
             return site.read('local_user_announcements_custom', data, presets).then(function(anouncement) {
                 //storeCoursesInMemory(attendence);
                 return anouncement;
             });
         });
-		 };	
+		 };
     return self;
 }]);
 angular.module('mm.core.anouncementall')
@@ -5712,10 +5741,10 @@ angular.module('mm.core.anouncementall')
 	$scope.openurlannouncementall = function(id){
          	var siteinfo = $mmSite.getInfo();
 	        var src =  $mmSite.getURL()+'/mod/forum/mobilediscuss.php?d='+id+'&uname='+siteinfo.username;
-       
+
       	var url=$sce.trustAsResourceUrl(src);
-        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
-           
+        window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes');
+
         }
   $ionicPlatform.registerBackButtonAction(function() {
       $state.go('site.mm_timetable');;
@@ -5730,7 +5759,7 @@ angular.module('mm.core.anouncementall')
         siteid = siteid || $mmSite.getId();
         var userid = $mmSite.getUserId(),
             presets = {},
-			
+
             data = {userid: userid};
         if (typeof userid === 'undefined') {
             return $q.reject();
@@ -5744,7 +5773,7 @@ angular.module('mm.core.anouncementall')
                 return anouncementall;
             });
         });
-		 };	
+		 };
     return self;
 }]);
 
@@ -5876,7 +5905,7 @@ angular.module('mm.core.login')
 		var finalsplit1=newsplit1.substring(0, 3);
         var newsplit2=split.substring(split.length - 6, split.length);
 		var finalsplit2=newsplit2.substring(0, 4);
-        
+
         if(domain1.indexOf(finalsplit) > -1){
         	if(finalsplit=="bt"){
 			var url='http://mydy.dypatil.edu/biotech-and-bioinformatics';
@@ -5911,7 +5940,7 @@ angular.module('mm.core.login')
 			var url='http://mydy.dypatil.edu/ayurveda';
 		}
         }
-		
+
 	 $scope.connect(url,usernamesplit);
 	 }
     $scope.connect = function(url,uname) {
@@ -11637,7 +11666,7 @@ angular.module('mm.addons.mod_resource')
 .directive('mmaModResourceHtmlLink', function() {
     return {
         restrict: 'A',
-        priority: 99,  
+        priority: 99,
         link: function(scope, element, attrs) {
             element.on('click', function(event) {
                 var href = element[0].getAttribute('data-href');
@@ -12110,9 +12139,9 @@ angular.module('mm.addons.mod_opencast')
             $scope.vurl=$sce.trustAsResourceUrl(stdetails.url);
 	    $scope.eventid=stdetails.eventid;
 	   // $scope.opencatsurls=stdetails.opencasturl;
-	    $scope.opencatsurl=$sce.trustAsResourceUrl(stdetails.opencasturl);	
+	    $scope.opencatsurl=$sce.trustAsResourceUrl(stdetails.opencasturl);
             $scope.type=stdetails.mimetype;
-	    
+
         });
 
     }]);
@@ -12180,7 +12209,7 @@ angular.module('mm.addons.mod_flexpaper')
 
         var presets = {};
         $scope.openurl = function(url){
-	window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes'); 
+	window.open(url,'_blank','location=yes,hardwareback=no,closebuttoncaption=Close,toolbar=yes');
             //var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,closebuttoncaption=Close,toolbar: no');
             //var ref=window.open(url, '_system', 'location=no,closebuttoncaption=Close,toolbar: no');
 
@@ -12190,7 +12219,7 @@ angular.module('mm.addons.mod_flexpaper')
         var moduledetails= module.completionstatus;
 	var src =  $mmSite.getURL()+'/mod/flexpaper/mobileview.php?id='+module.id+'&uname='+siteinfo.username;
         //var src=$mmSite.getURL()+"/mod/flexpaper/mobileview.php?id="+module.id;
-       
+
         return $scope.id=$sce.trustAsResourceUrl(src);
 
     }]);
