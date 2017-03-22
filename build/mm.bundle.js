@@ -4456,7 +4456,7 @@ angular.module('mm.core.login', [])
                 disableAnimate: true,
                 disableBack: true
             });
-            $state.transitionTo('site.mm_home');
+            $state.transitionTo('site.mm_timetable');
         }
     });
     function sessionExpired(siteid) {
@@ -5386,7 +5386,7 @@ angular.module('mm.core.attendence')
         });
     };
     $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+       window.history.back();
   }, 999);
 
 }]);
@@ -5416,7 +5416,7 @@ angular.module('mm.core.attendence')
     return self;
 }]);
 angular.module('mm.core.timetable')
-.controller('mmTimetableListCtrl', ["$scope","$state","$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory", function($scope,$state,$mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory) {
+.controller('mmTimetableListCtrl', ["$scope","$state","$mmTimetable","$ionicPlatform","$mmUtil","$ionicHistory","$ionicViewService", function($scope,$state,$mmTimetable, $ionicPlatform,$mmUtil,$ionicHistory,$ionicViewService) {
   console.log("I am home");
   var backcnt = 0;
     document.addEventListener('backbutton', function (event) {
@@ -5465,6 +5465,7 @@ angular.module('mm.core.timetable')
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
+    $ionicHistory.clearHistory();
 	 /*$ionicPlatform.registerBackButtonAction(function() {
       //  alert('hi');
      		//navigator.app.exitApp();
@@ -5519,8 +5520,9 @@ angular.module('mm.core.tomtimetable')
         });
     };
     $ionicPlatform.registerBackButtonAction(function() {
-      console.log('Going back');
-       $ionicHistory.backView();
+
+       window.history.back();
+       console.log('Going back');
   }, 999);
 
 }]);
@@ -5572,7 +5574,7 @@ angular.module('mm.core.weektimetable')
         });
     };
     $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+       window.history.back();
   }, 999);
 
 }]);
@@ -5624,7 +5626,7 @@ angular.module('mm.core.userprofile')
             });
         };
         $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+      window.history.back();
   }, 999);
 
     }]);
@@ -5685,7 +5687,7 @@ angular.module('mm.core.anouncement')
 
         }
         $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+      window.history.back();
   }, 999);
 }]);
 
@@ -5745,7 +5747,7 @@ angular.module('mm.core.anouncementall')
 
         }
   $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+      window.history.back();
   }, 999);
 }]);
 
