@@ -5469,10 +5469,7 @@ angular.module('mm.core.timetable')
       //  alert('hi');
      		//navigator.app.exitApp();
  	 }, 100);*/
- 	$ionicHistory.nextViewOptions({
- 		 disableBack: true,
- 		 historyRoot: true
-	});
+
 }]);
 
 angular.module('mm.core.timetable')
@@ -5522,7 +5519,8 @@ angular.module('mm.core.tomtimetable')
         });
     };
     $ionicPlatform.registerBackButtonAction(function() {
-      $state.go('site.mm_timetable');;
+      console.log('Going back');
+       $ionicHistory.backView();
   }, 999);
 
 }]);
